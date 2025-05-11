@@ -1,0 +1,353 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
+
+* {
+    margin:0;
+    padding: 0;
+}
+
+:root {
+    --cor--principal: #F1FAEA;
+    --cor--secundaria:  #283618;
+    --cor--terciaria: #606c38;
+    --cor--quaternaria: #DDA15E;
+    --cor--quinta: #BC6C25;
+    --fonte: "Lora", sans-serif;
+}
+body{
+    background: var(--cor--principal);
+}
+.titulo__header{
+    font-size: 20px;
+    font-weight: bold;
+    font-family: var(--fonte);
+    color: var(--cor--secundaria);
+
+}
+.conjunto__main{
+    display: flex;
+    gap: 9rem;
+}
+
+
+
+.titulo__main{
+    padding-left: 5%;
+    font-size: 20px;
+    font-family: var(--fonte);
+    color: var(--cor--terciaria);
+}
+.preencher__main{
+    height: 3.5rem;
+    background-color: #FFFF;
+    border-radius: 5px;
+    width: 28rem;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  text-align: center;
+}
+.conjunto__informacoes__bloco{
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+    width: 100%;
+    gap: 1rem;
+}
+.secao{
+       padding-left: 5%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.31rem;
+}
+
+.subtitulo__main{
+ 
+    font-size: 16px;
+    font-weight: bold;
+    font-family: var(--fonte);
+    color: var(--cor--terciaria);
+}
+.conjunto__preencher__cep{
+    display: flex;
+    gap: 3rem;
+}
+.preencher__cep{
+    border: none;
+    height: 2rem;
+    background-color: var(--cor--quaternaria);
+    border-radius: 5px;
+    width: 12rem;
+}
+.preencher__cep__validar{
+    border: none;
+    font-family: var(--fonte);
+    background-color: #606c38;
+    font-size: 11px;
+    font-weight: bold;
+     height: 2rem;
+    background-color: var(--cor--quaternaria);
+    border-radius: 5px;
+    width: 7rem;
+}
+.secao__rua__numero__cidade__estado{
+    display: flex;
+}
+.preencher__rua__bairro{
+      border: none;
+    height: 2rem;
+    background-color: var(--cor--quaternaria);
+    border-radius: 5px;
+    width: 25rem;
+}
+.preencher__numero__casa{
+     border: none;
+    height: 2rem;
+    background-color: var(--cor--quaternaria);
+    border-radius: 5px;
+    width: 10rem;
+}
+.preencher__cidade__estado{
+  border: none;
+    height: 2rem;
+    background-color: var(--cor--quaternaria);
+    border-radius: 5px;
+    width: 10.4rem;
+}
+.conjunto__cidade__estado{
+    padding-top: 1rem;
+}
+.texto__oq__um__ecoponto{
+    position: absolute;
+    left: 46rem;
+    top: 9rem;
+    font-family: var(--fonte);
+    color: var(--cor--terciaria);
+    font-size: 22px;
+    width: 40%;
+}
+
+.conjunto__botoes__imagem{
+    display: flex;
+    gap: 12rem;
+    padding-top: 3rem;
+}
+.imagem{
+    height: 9rem;
+}
+/*.container{
+    position: relative;
+  height: 150px;
+  background: #eee;
+}*/
+.botoes__final{
+    display: flex;
+    padding: 5% 5%;
+    gap: 4rem;
+}
+.botao__encontrar{
+      border: none;
+      font-family: var(--fonte);
+      font-weight: bold;
+      color: var(--cor--principal);
+    height: 2.8rem;
+    background-color: var(--cor--quinta);
+    border-radius: 5px;
+    width: 10.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+.botao__cancelar{
+      border: 0.5rem solid var(--cor--quinta);
+      font-family: var(--fonte);
+      font-weight: bold;
+    height: 2.8rem;
+    background-color: var(--cor--principal);
+    border-radius: 5px;
+    color: var(--cor--quinta);
+       width: 10.4rem;
+}
+.erro {
+  background-color: var(--cor--quinta);
+}
+.conjunto__header1{
+    display: flex;
+   align-items: center;
+   margin-left: 3.5%;
+   margin-top: 0.5rem;
+}
+
+/*ARQUIVO 2*/
+.topo__ecoponto {
+background-color: var(--cor--terciaria);
+}
+.conjunto__header2{
+    display: flex;
+    align-items: center;
+    padding: 1% 4%;
+    gap: 18rem;
+}
+.imagem__voltar{
+    width: 3rem;
+}
+.conjunto__header__imagem__voltar{
+    display: flex;
+    align-items: center;
+}
+
+.conjunto__econponto__encontrado{
+    padding-top: 2rem;
+    display: flex;
+    gap: 10rem;
+    justify-content: center;
+    width: 100%;
+}
+.retangulo__fundo{
+    width: 32rem;
+    height: 34rem;
+      background-color: var(--cor--quaternaria);
+  border-radius: 15px;
+}
+.nome__ecoponto__estilo{
+    font-family: var(--fonte);
+    color: var(--cor--secundaria);
+    font-weight: bold;
+    font-size: 24px;
+}
+.conjunto__retangulo__dentro{
+    gap: 0.5rem;
+    padding-top: 1rem;
+    padding-left: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    width: 91%;
+}
+.estilo__endereco{
+    font-size: medium;
+    font-family: var(--fonte);
+    font-size: 16px;
+}
+.destaque__endereco{
+    font-weight: bold;
+}
+.estilo__horario{
+    font-family: var(--fonte);
+    font-size: 20px;
+    font-weight: bold;
+}
+.conjunto__tipos__aceitos{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+.tamanho__imagens__ecoponto__encontrado{
+    width: 1.5rem;
+}
+.conjunto__imagem__valores{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+}
+.preencher__valores{
+     border: none;
+    height: 2.2rem;
+    background-color: var(--cor--principal);
+    border-radius: 5px;
+    width: 14rem;
+}
+.conjunto__retangulo__dupla{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}.preencher__eletronico{
+      border: none;
+    height: 2.2rem;
+    background-color: var(--cor--quinta);
+    border-radius: 5px;
+    width: 14rem;
+}
+.conjunto__lixo__eletronico{
+    display: flex;
+    align-items: center;
+    padding-top: 1rem;
+}
+.botoes__ecoponto__encontrado{
+    display: flex;
+    gap: 5rem;
+}
+.botao__preparar__lixo{
+         border: none;
+      font-family: var(--fonte);
+      font-weight: bold;
+      color: var(--cor--principal);
+    height: 2.8rem;
+    background-color: var(--cor--secundaria);
+    border-radius: 5px;
+    width: 10.4rem;
+}
+.botao__inscrever{
+         border: 0.5rem solid var(--cor--secundaria);
+      font-family: var(--fonte);
+      font-weight: bold;
+    height: 2.8rem;
+    background-color: var(--cor--principal);
+    border-radius: 5px;
+    color: var(--cor--secundaria);
+       width: 10.4rem;
+}
+.conjunto__localizacao{
+    display: flex;
+    flex-direction: column;
+   gap: 0.5rem;
+    padding-top: 1rem;
+    padding-left: 1.5rem;
+}
+.retangulo__mapa{
+     border: none;
+    height: 20rem;
+    background-color: var(--cor--principal);
+    border-radius: 5px;
+    width: 29rem;
+}
+
+@media(max-width: 480px){
+.conjunto__main{
+    flex-direction: column;
+    
+}
+.texto__oq__um__ecoponto{
+    left: 2rem;
+    top: 5rem;
+    width: 100%;
+}
+
+.preencher__main{
+display: none;
+}
+.conjunto__main{
+    padding-top: 28rem;
+}
+.secao__rua__numero__cidade__estado{
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.conjunto__botoes__imagem{
+    flex-direction: column-reverse;
+    padding-top: 0;
+}
+.imagem{
+    display: none;
+}
+.preencher__rua__bairro{
+    width: 23rem;
+}
+}
+@media(min-width:4){
+  .conjunto__main{
+    gap: 30rem;
+  }
+
+}

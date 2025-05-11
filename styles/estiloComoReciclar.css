@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
+
+* {
+    margin:0;
+    padding: 0;
+}
+
+:root {
+    --cor--principal: #F1FAEA;
+    --cor--secundaria:  #283618;
+    --cor--terciaria: #606c38;
+    --cor--quaternaria: #DDA15E;
+    --cor--quinta: #BC6C25;
+    --fonte: "Lora", sans-serif;
+}
+
+body {
+    background: var(--cor--principal);
+    font-family: var(--fonte);
+}
+
+.conjunto__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--cor--terciaria);
+}
+
+.titulo__principal {
+    color: var(--cor--principal);
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.conjunto__header__imagem__voltar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.imagem__voltar {
+    width: 2rem;
+}
+
+.titulo__header {
+    color: var(--cor--principal);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.conjunto__main {
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.card__material {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.cabecalho__card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    color: white;
+}
+
+.cabecalho__card img {
+    width: 2rem;
+    height: 2rem;
+}
+
+.cabecalho__card h2 {
+    font-size: 18px;
+    margin: 0;
+}
+
+.lista__dicas {
+    padding: 1.5rem;
+    color: var(--cor--secundaria);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.lista__dicas li {
+    line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+    .conjunto__main {
+        grid-template-columns: 1fr;
+    }
+}
