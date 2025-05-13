@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
+
+:root {
+  --cor--principal: #F1FAEA;
+  --cor--secundaria: #283618;
+  --cor--terciaria: #606c38;
+  --cor--quaternaria: #DDA15E;
+  --cor--quinta: #BC6C25;
+  --fonte: "Lora", sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--fonte);
+  background-color: var(--cor--principal);
+  color: var(--cor--secundaria);
+}
+
+.topo {
+  background-color: var(--cor--secundaria);
+  padding: 1rem;
+  padding-left: 3rem;
+  display: flex;
+  align-items: center;
+}
+.imagem__folha{
+    width: 2rem;
+}
+
+.voltar {
+  color: var(--cor--principal);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.formulario {
+  background-color: var(--cor--quaternaria);
+  padding: 2rem;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+input, textarea {
+  width: 95%;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  border: 1px solid var(--cor--terciaria);
+  border-radius: 4px;
+  font-family: var(--fonte);
+}
+
+button {
+  margin-top: 2rem;
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--cor--secundaria);
+  color: var(--cor--principal);
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--cor--quinta);
+}
