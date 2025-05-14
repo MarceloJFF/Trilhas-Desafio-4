@@ -7,10 +7,11 @@
 
 :root {
     --cor--principal: #F1FAEA;
-    --cor--secundaria:  #283618;
-    --cor--terciaria: #606c38;
+    --cor--secundaria:  #212121;
+    --cor--terciaria: #2E7D32;
     --cor--quaternaria: #DDA15E;
     --cor--quinta: #BC6C25;
+    --botao: #66BB6A;
     --fonte: "Lora", sans-serif;
 }
 body{
@@ -284,18 +285,18 @@ background-color: var(--cor--terciaria);
       font-weight: bold;
       color: var(--cor--principal);
     height: 2.8rem;
-    background-color: var(--cor--secundaria);
+    background-color: var(--botao);
     border-radius: 5px;
     width: 10.4rem;
 }
 .botao__inscrever{
-         border: 0.5rem solid var(--cor--secundaria);
+         border: 0.5rem solid var(--botao);
       font-family: var(--fonte);
       font-weight: bold;
     height: 2.8rem;
     background-color: var(--cor--principal);
     border-radius: 5px;
-    color: var(--cor--secundaria);
+    color: var(--botao);
        width: 10.4rem;
 }
 .conjunto__localizacao{
@@ -317,6 +318,16 @@ background-color: var(--cor--terciaria);
 .conjunto__main{
     flex-direction: column;
     
+}
+.conjunto__header2{
+    gap: 4rem;
+}
+.conjunto__econponto__encontrado{
+    width: 100%;
+    padding-left: 1rem;
+}
+.nome__ecoponto__encontrado{
+    font-size: 1.5rem;
 }
 .texto__oq__um__ecoponto{
     left: 2rem;
@@ -343,6 +354,25 @@ display: none;
 }
 .preencher__rua__bairro{
     width: 23rem;
+}
+.conjunto__econponto__encontrado{
+    flex-direction: column;
+    margin-left: 2rem;
+}
+.retangulo__fundo{
+    width: 22rem;
+    height: 40rem;
+}
+.retangulo__mapa{
+    width: 19rem;
+    height: 15rem;
+}
+.botoes__ecoponto__encontrado{
+    gap: 1.5rem;
+}
+.conjunto__tipos__aceitos{
+    display: flex;
+    flex-direction: column;
 }
 }
 @media(min-width:4){
