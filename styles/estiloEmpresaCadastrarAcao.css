@@ -1,12 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
 
 :root {
-  --cor--principal: #F1FAEA;
-  --cor--secundaria: #283618;
-  --cor--terciaria: #606c38;
-  --cor--quaternaria: #DDA15E;
-  --cor--quinta: #BC6C25;
-  --fonte: "Lora", sans-serif;
+    --verde--primario: #2E7D32;
+    --texto--principal: #212121;
+    --erro--aviso: #D32F2F;
+    --confirmacao: #66BB6A;
+    --fundo--claro: #F5F5F5;
+    --laranja--destaque1: #DDA15E;
+    --laranja--destaque2: #BC6C25;
+    --fonte: "Lora", sans-serif;
 }
 
 body {
@@ -17,7 +19,7 @@ body {
 }
 
 .topo {
-  background-color: var(--cor--secundaria);
+  background-color: var(--verde--primario);
   padding: 1rem;
   padding-left: 3rem;
   display: flex;
@@ -40,7 +42,7 @@ body {
 }
 
 .formulario {
-  background-color: var(--cor--quaternaria);
+  background-color: var(--laranja--destaque1);
   padding: 2rem;
   border-radius: 8px;
   width: 100%;
@@ -71,8 +73,8 @@ button {
   margin-top: 2rem;
   width: 100%;
   padding: 0.75rem;
-  background-color: var(--cor--secundaria);
-  color: var(--cor--principal);
+  background-color: var(--confirmacao);
+  color: var(--texto--principal);
   border: none;
   border-radius: 4px;
   font-size: 1rem;

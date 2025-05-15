@@ -1,10 +1,12 @@
 :root {
-  --cor--principal: #F1FAEA;
-  --cor--secundaria: #283618;
-  --cor--terciaria: #606c38;
-  --cor--quaternaria: #DDA15E;
-  --cor--quinta: #BC6C25;
-  --fonte: "Lora", sans-serif;
+    --verde--primario: #2E7D32;
+    --texto--principal: #212121;
+    --erro--aviso: #D32F2F;
+    --confirmacao: #66BB6A;
+    --fundo--claro: #F5F5F5;
+    --laranja--destaque1: #DDA15E;
+    --laranja--destaque2: #BC6C25;
+    --fonte: "Lora", sans-serif;
 }
 
 body {
@@ -19,7 +21,7 @@ body {
   align-items: center;
   gap: 1rem;
   padding: 1rem 2rem;
-  background-color: var(--cor--secundaria);
+  background-color: var(--verde--primario);
   color: var(--cor--principal);
 }
 .conjunto__cabecalho{
@@ -34,7 +36,7 @@ body {
 }
 
 .voltar {
-  color:  var(--cor--principal);
+  color:  var(--texto--principal);
   text-decoration: none;
   font-weight: bold;
 }
@@ -49,7 +51,7 @@ body {
   width: 12rem;
 }
 .painel-acoes {
-  background-color: var(--cor--quaternaria);
+  background-color: var(--laranja--destaque1);
   border-radius: 12px;
   padding: 2rem;
   max-width: 900px;
@@ -63,7 +65,7 @@ body {
 }
 
 .caixa-acao {
-  background-color: var(--cor--principal);
+  background-color: var(--fundo--claro);
   padding: 1.5rem;
   border-radius: 8px;
   margin-bottom: 1.5rem;
@@ -71,7 +73,7 @@ body {
 }
 
 .botao-inscricao {
-  background-color: var(--cor--secundaria);
+  background-color: var(--confirmacao);
   color: var(--cor--principal);
   border: none;
   border-radius: 4px;
@@ -97,7 +99,7 @@ body {
 }
 
 .mensagem-sucesso {
-  background-color: var(--cor--quaternaria);
+  background-color: var(--laranja--destaque1);
   padding: 2rem;
   border-radius: 12px;
   max-width: 500px;
@@ -105,7 +107,7 @@ body {
 }
 
 .botao-voltar {
-  background-color: var(--cor--secundaria);
+  background-color: var(--confirmacao);
   color: var(--cor--principal);
   border: none;
   border-radius: 4px;

@@ -6,22 +6,26 @@
 }
 
 :root {
-    --cor--principal: #F1FAEA;
-    --cor--secundaria:  #212121;
-    --cor--terciaria: #2E7D32;
-    --cor--quaternaria: #DDA15E;
-    --cor--quinta: #BC6C25;
-    --botao: #66BB6A;
+    --verde--primario: #2E7D32;
+    --texto--principal: #212121;
+    --erro--aviso: #D32F2F;
+    --confirmacao: #66BB6A;
+    --fundo--claro: #F5F5F5;
+    --laranja--destaque1: #DDA15E;
+    --laranja--destaque2: #BC6C25;
     --fonte: "Lora", sans-serif;
 }
 body{
-    background: var(--cor--principal);
+    background: var(--fundo--claro);
+}
+header{
+    background-color: var(--verde--primario);
 }
 .titulo__header{
     font-size: 20px;
     font-weight: bold;
     font-family: var(--fonte);
-    color: var(--cor--secundaria);
+    color: var(--texto--principal);
 
 }
 .conjunto__main{
@@ -32,27 +36,20 @@ body{
 
 
 .titulo__main{
+    padding-top: 0.5rem;
     padding-left: 5%;
     font-size: 20px;
+    width: 30%;
     font-family: var(--fonte);
-    color: var(--cor--terciaria);
+    color: var(--texto--principal);
 }
-.preencher__main{
-    height: 3.5rem;
-    background-color: #FFFF;
-    border-radius: 5px;
-    width: 28rem;
-    display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  text-align: center;
-}
+
 .conjunto__informacoes__bloco{
     display: flex;
     flex-direction: column;
     padding-top: 1rem;
-    width: 100%;
+    margin-left: 1.1rem;
+    width: 70%;
     gap: 1rem;
 }
 .secao{
@@ -67,7 +64,7 @@ body{
     font-size: 16px;
     font-weight: bold;
     font-family: var(--fonte);
-    color: var(--cor--terciaria);
+    color: var(--texto--principal);
 }
 .conjunto__preencher__cep{
     display: flex;
@@ -76,7 +73,7 @@ body{
 .preencher__cep{
     border: none;
     height: 2rem;
-    background-color: var(--cor--quaternaria);
+    background-color: var(--laranja--destaque1);
     border-radius: 5px;
     width: 12rem;
 }
@@ -87,54 +84,58 @@ body{
     font-size: 11px;
     font-weight: bold;
      height: 2rem;
-    background-color: var(--cor--quaternaria);
+    background-color: var(--laranja--destaque1);
     border-radius: 5px;
     width: 7rem;
 }
 .secao__rua__numero__cidade__estado{
     display: flex;
+    flex-direction: column;
 }
 .preencher__rua__bairro{
       border: none;
     height: 2rem;
-    background-color: var(--cor--quaternaria);
+    background-color: var(--laranja--destaque1);
     border-radius: 5px;
     width: 25rem;
 }
 .preencher__numero__casa{
      border: none;
     height: 2rem;
-    background-color: var(--cor--quaternaria);
+    background-color: var(--laranja--destaque1);
     border-radius: 5px;
     width: 10rem;
 }
 .preencher__cidade__estado{
   border: none;
     height: 2rem;
-    background-color: var(--cor--quaternaria);
+    background-color: var(--laranja--destaque1);
     border-radius: 5px;
     width: 10.4rem;
 }
 .conjunto__cidade__estado{
     padding-top: 1rem;
+    width: 70%;
+    margin-left: 1.1rem;
 }
 .texto__oq__um__ecoponto{
     position: absolute;
-    left: 46rem;
+    left: 35rem;
     top: 9rem;
     font-family: var(--fonte);
-    color: var(--cor--terciaria);
-    font-size: 22px;
-    width: 40%;
+    color: var(--texto--principal);
+    font-size: 18px;
+    width: 25%;
 }
 
 .conjunto__botoes__imagem{
     display: flex;
-    gap: 12rem;
+    gap: 3.5rem;
     padding-top: 3rem;
+    width: 70%;
 }
 .imagem{
-    height: 9rem;
+    height: 6rem;
 }
 /*.container{
     position: relative;
@@ -150,9 +151,9 @@ body{
       border: none;
       font-family: var(--fonte);
       font-weight: bold;
-      color: var(--cor--principal);
+      color: var(--texto--principal);
     height: 2.8rem;
-    background-color: var(--cor--quinta);
+    background-color: var(--confirmacao);
     border-radius: 5px;
     width: 10.4rem;
     display: flex;
@@ -161,13 +162,13 @@ body{
     text-decoration: none;
 }
 .botao__cancelar{
-      border: 0.5rem solid var(--cor--quinta);
+      border: 0.5rem solid var(--confirmacao);
       font-family: var(--fonte);
       font-weight: bold;
     height: 2.8rem;
-    background-color: var(--cor--principal);
+    background-color: var(--fundo--claro);
     border-radius: 5px;
-    color: var(--cor--quinta);
+    color: var(--texto--principal);
        width: 10.4rem;
 }
 .erro {
@@ -176,8 +177,8 @@ body{
 .conjunto__header1{
     display: flex;
    align-items: center;
-   margin-left: 3.5%;
-   margin-top: 0.5rem;
+   padding-left: 2rem;
+   padding-top: 1rem;
 }
 
 /*ARQUIVO 2*/
@@ -208,7 +209,7 @@ background-color: var(--cor--terciaria);
 .retangulo__fundo{
     width: 32rem;
     height: 34rem;
-      background-color: var(--cor--quaternaria);
+      background-color: var(--laranja--destaque1);
   border-radius: 15px;
 }
 .nome__ecoponto__estilo{
@@ -255,7 +256,7 @@ background-color: var(--cor--terciaria);
 .preencher__valores{
      border: none;
     height: 2.2rem;
-    background-color: var(--cor--principal);
+    background-color: var(--fundo--claro);
     border-radius: 5px;
     width: 14rem;
 }
@@ -283,18 +284,18 @@ background-color: var(--cor--terciaria);
          border: none;
       font-family: var(--fonte);
       font-weight: bold;
-      color: var(--cor--principal);
+      color: var(--texto--principal);
     height: 2.8rem;
-    background-color: var(--botao);
+    background-color: var(--verde--primario);
     border-radius: 5px;
     width: 10.4rem;
 }
 .botao__inscrever{
-         border: 0.5rem solid var(--botao);
+         border: 0.5rem solid var(--confirmacao);
       font-family: var(--fonte);
       font-weight: bold;
     height: 2.8rem;
-    background-color: var(--cor--principal);
+    background-color: var(--fundo--claro);
     border-radius: 5px;
     color: var(--botao);
        width: 10.4rem;
@@ -309,7 +310,7 @@ background-color: var(--cor--terciaria);
 .retangulo__mapa{
      border: none;
     height: 20rem;
-    background-color: var(--cor--principal);
+    background-color: var(--fundo--claro);
     border-radius: 5px;
     width: 29rem;
 }
@@ -332,9 +333,13 @@ background-color: var(--cor--terciaria);
 .texto__oq__um__ecoponto{
     left: 2rem;
     top: 5rem;
-    width: 100%;
+    font-size: 21px;
+    width: 80%;
 }
-
+.titulo__main{
+    width: 80%;
+    margin-left: 0.5rem;
+}
 .preencher__main{
 display: none;
 }
@@ -375,9 +380,13 @@ display: none;
     flex-direction: column;
 }
 }
-@media(min-width:4){
-  .conjunto__main{
-    gap: 30rem;
+/*@media (orientation: landscape) {
+  /* Estilos para quando o celular estiver deitado 
+  
+  .secao__rua__numero__cidade__estado{
+    flex-direction: column;
   }
-
-}
+  .texto__oq__um__ecoponto{
+    left: 20rem;
+  }
+}*/
