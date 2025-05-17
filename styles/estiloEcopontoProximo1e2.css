@@ -204,13 +204,13 @@ background-color: var(--cor--terciaria);
 .conjunto__econponto__encontrado{
     padding-top: 2rem;
     display: flex;
-    gap: 10rem;
+    gap: 2rem;
     justify-content: center;
-    width: 100%;
+    width: 90%;
 }
 .retangulo__fundo{
-    width: 32rem;
-    height: 34rem;
+    width: 30rem;
+    height: 40rem;
       background-color: var(--laranja--destaque1);
   border-radius: 15px;
 }
@@ -235,6 +235,7 @@ background-color: var(--cor--terciaria);
 }
 .destaque__endereco{
     font-weight: bold;
+    
 }
 .estilo__horario{
     font-family: var(--fonte);
@@ -242,9 +243,9 @@ background-color: var(--cor--terciaria);
     font-weight: bold;
 }
 .conjunto__tipos__aceitos{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 .tamanho__imagens__ecoponto__encontrado{
     width: 1.5rem;
@@ -260,7 +261,7 @@ background-color: var(--cor--terciaria);
     height: 2.2rem;
     background-color: var(--fundo--claro);
     border-radius: 5px;
-    width: 14rem;
+    width: 25rem;
 }
 .conjunto__retangulo__dupla{
     display: flex;
@@ -269,9 +270,9 @@ background-color: var(--cor--terciaria);
 }.preencher__eletronico{
       border: none;
     height: 2.2rem;
-    background-color: var(--cor--quinta);
+    background-color: var(--laranja--destaque2);
     border-radius: 5px;
-    width: 14rem;
+    width: 12rem;
 }
 .conjunto__lixo__eletronico{
     display: flex;
@@ -314,7 +315,7 @@ background-color: var(--cor--terciaria);
     height: 20rem;
     background-color: var(--fundo--claro);
     border-radius: 5px;
-    width: 29rem;
+    width: 26rem;
 }
 
 @media(max-width: 480px){
@@ -364,7 +365,7 @@ display: none;
 }
 .conjunto__econponto__encontrado{
     flex-direction: column;
-    margin-left: 2rem;
+    margin-left: 0;
 }
 .retangulo__fundo{
     width: 22rem;
@@ -381,7 +382,17 @@ display: none;
     display: flex;
     flex-direction: column;
 }
+.botoes__final{
+    margin-left: 1.1rem;
 }
+.preencher__valores{
+    width: 18rem;
+}
+.nome__ecoponto__encontrado{
+    font-size: 1.1rem;
+}
+}
+
 /*@media (orientation: landscape) {
   /* Estilos para quando o celular estiver deitado 
   
