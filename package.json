@@ -1,0 +1,25 @@
+{
+  "name": "eco_ponto",
+  "version": "1.0.0",
+  "description": "Plataforma para gerenciamento de ecopontos e coleta seletiva",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^10.0.0",
+    "eco_ponto": "file:",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.4",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.14.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "author": "Seu Nome",
+  "license": "ISC"
+}
