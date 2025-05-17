@@ -21,13 +21,13 @@ body{
 header{
     background-color: var(--verde--primario);
 }
-.titulo__header{
-    font-size: 20px;
+.link{
+        text-decoration: none;
+           font-size: 20px;
     font-weight: bold;
     font-family: var(--fonte);
     color: var(--texto--principal);
-
-}
+    }
 .conjunto__main{
     display: flex;
     gap: 9rem;
@@ -174,7 +174,9 @@ header{
 .erro {
   background-color: var(--cor--quinta);
 }
+
 .conjunto__header1{
+    
     display: flex;
    align-items: center;
    padding-left: 2rem;
