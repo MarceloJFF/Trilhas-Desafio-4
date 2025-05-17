@@ -1,0 +1,169 @@
+/* Estilos específicos para a página de busca de ecopontos */
+.conjunto__main {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.titulo__main {
+    color: #4CAF50;
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+}
+
+.preencher__main {
+    font-size: 1.4rem;
+    margin-top: 30px;
+}
+
+.conjunto__informacoes__bloco {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.secao {
+    margin-bottom: 15px;
+}
+
+.subtitulo__main {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.conjunto__preencher__cep {
+    display: flex;
+    gap: 10px;
+}
+
+.preencher__cep {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.preencher__cep__validar {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.preencher__cep__validar:hover {
+    background-color: #45a049;
+}
+
+.mensagem-erro {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.secao__rua__numero__cidade__estado {
+    display: flex;
+    gap: 15px;
+}
+
+.secao__rua__numero__cidade__estado .secao:first-child {
+    flex: 2;
+}
+
+.secao__rua__numero__cidade__estado .secao:last-child {
+    flex: 1;
+}
+
+.preencher__rua__bairro, 
+.preencher__numero__casa,
+.preencher__cidade__estado {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.conjunto__cidade__estado {
+    margin-bottom: 30px;
+}
+
+.conjunto__texto__image {
+    margin-bottom: 30px;
+}
+
+.texto__oq__um__ecoponto {
+    display: block;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    line-height: 1.6;
+}
+
+.conjunto__botoes__imagem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.botoes__final {
+    display: flex;
+    gap: 15px;
+}
+
+.botao__encontrar, 
+.botao__cancelar {
+    padding: 12px 25px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+.botao__encontrar {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
+.botao__cancelar {
+    background-color: #f44336;
+    color: white;
+    border: none;
+}
+
+.botao__encontrar:hover {
+    background-color: #45a049;
+}
+
+.botao__cancelar:hover {
+    background-color: #d32f2f;
+}
+
+.imagem-container {
+    color: #4CAF50;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .secao__rua__numero__cidade__estado {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .conjunto__botoes__imagem {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .botoes__final {
+        width: 100%;
+        justify-content: center;
+    }
+} 

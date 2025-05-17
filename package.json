@@ -13,9 +13,11 @@
     "dotenv": "^10.0.0",
     "eco_ponto": "file:",
     "express": "^4.17.1",
-    "express-handlebars": "^5.3.4",
+    "express-handlebars": "^8.0.3",
     "jsonwebtoken": "^9.0.2",
-    "mysql2": "^3.14.1"
+    "mariadb": "^3.4.2",
+    "mysql2": "^3.14.1",
+    "sequelize": "^6.37.7"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

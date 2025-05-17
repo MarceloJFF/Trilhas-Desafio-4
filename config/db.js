@@ -4,8 +4,8 @@ import mysql from 'mysql2';
 const DB = mysql.createConnection({
   host: 'localhost',          // O servidor do MySQL está rodando no localhost 
   user: 'root',               // Usuário padrão do XAMPP (root)
-  password: '12345',               // Senha padrão do XAMPP 
-  database: 'eco_ponto'       // Nome do banco de dados criado no PhpMyAdmin
+  password: '',               // Senha padrão do XAMPP 
+  database: 'recycle'       // Nome do banco de dados criado no PhpMyAdmin
 });
 
 // Verificar a conexão

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Ponto - {{title}}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    {{#if pageStyle}}
+    <link rel="stylesheet" href="/assets/css/{{pageStyle}}.css">
+    {{/if}}
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-recycle"></i>
+                <span>RECICLE</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/">Página Inicial</a></li>
+                    <li><a href="/ecopontos">Ecopontos Próximos</a></li>
+                    <li><a href="/inscrever-acao">Ações Voluntárias</a></li>
+                    <li><a href="/cadastrar-empresa">Cadastrar Empresas</a></li>
+                    <li><a href="/recompensa-verde">Recompensa Verde</a></li>
+                    <li><a href="/como-reciclar">Como Reciclar</a></li>
+                    <li><a href="/login" class="login-btn">Entre ou Cadastre-se</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        {{{body}}}
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Sobre Nós</h3>
+                <ul>
+                    <li><a href="#">Missão</a></li>
+                    <li><a href="#">Equipe</a></li>
+                    <li><a href="#">Parceiros</a></li>
+                    <li><a href="#">Impacto Ambiental</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Recursos</h3>
+                <ul>
+                    <li><a href="/ecopontos">Ecopontos</a></li>
+                    <li><a href="/inscrever-acao">Eventos</a></li>
+                    <li><a href="/como-reciclar">Guia de Reciclagem</a></li>
+                    <li><a href="/recompensa-verde">Recompensas</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Ajuda</h3>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Contato</a></li>
+                    <li><a href="#">Termos de Uso</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Conecte-se</h3>
+                <p>Nos siga nas redes sociais</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-figma"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Recicle - Todos os direitos reservados</p>
+        </div>
+    </footer>
+
+    <script src="/assets/js/script.js"></script>
+</body>
+</html> 
