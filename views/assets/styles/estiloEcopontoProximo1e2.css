@@ -21,13 +21,13 @@ body{
 header{
     background-color: var(--verde--primario);
 }
-.link{
-        text-decoration: none;
-           font-size: 20px;
+.titulo__header{
+    font-size: 20px;
     font-weight: bold;
     font-family: var(--fonte);
     color: var(--texto--principal);
-    }
+
+}
 .conjunto__main{
     display: flex;
     gap: 9rem;
@@ -174,9 +174,7 @@ header{
 .erro {
   background-color: var(--cor--quinta);
 }
-
 .conjunto__header1{
-    
     display: flex;
    align-items: center;
    padding-left: 2rem;
@@ -204,13 +202,13 @@ background-color: var(--cor--terciaria);
 .conjunto__econponto__encontrado{
     padding-top: 2rem;
     display: flex;
-    gap: 2rem;
+    gap: 10rem;
     justify-content: center;
-    width: 90%;
+    width: 100%;
 }
 .retangulo__fundo{
-    width: 30rem;
-    height: 40rem;
+    width: 32rem;
+    height: 34rem;
       background-color: var(--laranja--destaque1);
   border-radius: 15px;
 }
@@ -235,7 +233,6 @@ background-color: var(--cor--terciaria);
 }
 .destaque__endereco{
     font-weight: bold;
-    
 }
 .estilo__horario{
     font-family: var(--fonte);
@@ -243,9 +240,9 @@ background-color: var(--cor--terciaria);
     font-weight: bold;
 }
 .conjunto__tipos__aceitos{
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
 }
 .tamanho__imagens__ecoponto__encontrado{
     width: 1.5rem;
@@ -261,7 +258,7 @@ background-color: var(--cor--terciaria);
     height: 2.2rem;
     background-color: var(--fundo--claro);
     border-radius: 5px;
-    width: 25rem;
+    width: 14rem;
 }
 .conjunto__retangulo__dupla{
     display: flex;
@@ -270,9 +267,9 @@ background-color: var(--cor--terciaria);
 }.preencher__eletronico{
       border: none;
     height: 2.2rem;
-    background-color: var(--laranja--destaque2);
+    background-color: var(--cor--quinta);
     border-radius: 5px;
-    width: 12rem;
+    width: 14rem;
 }
 .conjunto__lixo__eletronico{
     display: flex;
@@ -315,7 +312,7 @@ background-color: var(--cor--terciaria);
     height: 20rem;
     background-color: var(--fundo--claro);
     border-radius: 5px;
-    width: 26rem;
+    width: 29rem;
 }
 
 @media(max-width: 480px){
@@ -365,7 +362,7 @@ display: none;
 }
 .conjunto__econponto__encontrado{
     flex-direction: column;
-    margin-left: 0;
+    margin-left: 2rem;
 }
 .retangulo__fundo{
     width: 22rem;
@@ -382,17 +379,7 @@ display: none;
     display: flex;
     flex-direction: column;
 }
-.botoes__final{
-    margin-left: 1.1rem;
 }
-.preencher__valores{
-    width: 18rem;
-}
-.nome__ecoponto__encontrado{
-    font-size: 1.1rem;
-}
-}
-
 /*@media (orientation: landscape) {
   /* Estilos para quando o celular estiver deitado 
   

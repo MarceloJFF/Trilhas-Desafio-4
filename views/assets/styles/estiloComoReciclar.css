@@ -1,36 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
 
 * {
-    margin:0;
+    margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lora', sans-serif;
 }
 
 :root {
-    --cor--principal: #F1FAEA;
-    --cor--secundaria:  #283618;
-    --cor--terciaria: #606c38;
-    --cor--quaternaria: #DDA15E;
-    --cor--quinta: #BC6C25;
-    --fonte: "Lora", sans-serif;
+    --verde--primario: #2E7D32;
+    --texto--principal: #212121;
+    --erro--aviso: #D32F2F;
+    --confirmacao: #66BB6A;
+    --fundo--claro: #F5F5F5;
+    --laranja--destaque1: #DDA15E;
+    --laranja--destaque2: #BC6C25;
 }
 
 body {
-    background: var(--cor--principal);
-    font-family: var(--fonte);
+    background: var(--fundo--claro);
+}
+
+header {
+    background-color: var(--verde--primario);
+    padding: 1rem;
 }
 
 .conjunto__header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
-    background-color: var(--cor--terciaria);
-}
-
-.titulo__principal {
-    color: var(--cor--principal);
-    font-size: 24px;
-    font-weight: bold;
+    justify-content: space-between;
 }
 
 .conjunto__header__imagem__voltar {
@@ -43,24 +42,35 @@ body {
     width: 2rem;
 }
 
-.titulo__header {
-    color: var(--cor--principal);
-    font-weight: bold;
+.titulo__header a {
+    color: var(--texto--principal);
     text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.titulo__principal {
+    color: white;
+    font-size: 1.5rem;
+}
+
+main {
+    padding: 2rem;
 }
 
 .conjunto__main {
-    padding: 2rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .card__material {
-    background-color: white;
-    border-radius: 10px;
+    background: white;
+    border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .cabecalho__card {
@@ -77,20 +87,27 @@ body {
 }
 
 .cabecalho__card h2 {
-    font-size: 18px;
-    margin: 0;
+    font-size: 1.2rem;
 }
 
 .lista__dicas {
-    padding: 1.5rem;
-    color: var(--cor--secundaria);
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
+    padding: 1rem;
+    list-style-type: none;
 }
 
 .lista__dicas li {
-    line-height: 1.4;
+    padding: 0.5rem 0;
+    color: var(--texto--principal);
+    font-size: 0.9rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.lista__dicas li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--laranja--destaque2);
 }
 
 @media (max-width: 768px) {

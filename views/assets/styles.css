@@ -96,7 +96,7 @@ main {
 }
 
 .hero {
-    background-color: #DDA15E;
+    background-color: var(--verde-claro);
     color: var(--branco);
     padding: 3rem 2rem;
     border-radius: 10px;
@@ -133,7 +133,7 @@ main {
 }
 
 .search-btn {
-    background-color: #BC6C25;
+    background-color: var(--verde-escuro);
     color: var(--branco);
     border: none;
     padding: 0 1.5rem;
@@ -155,7 +155,7 @@ main {
 }
 
 .feature-card {
-    background-color: #DDA15E;
+    background-color: var(--branco);
     border-radius: 10px;
     padding: 1.5rem;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -168,19 +168,15 @@ main {
 }
 
 .feature-card h3 {
-    color: var(--preto);
+    color: var(--verde-principal);
     margin-bottom: 1rem;
     font-size: 1.3rem;
-    border-bottom: 2px solid var(--preto);
+    border-bottom: 2px solid var(--verde-claro);
     padding-bottom: 0.5rem;
 }
 
 .feature-card p {
-    color: var(--preto);
-}
-.fa-hands-helping,.fa-handshake,.fa-award,.fa-map-marker-alt
-,.fa-trash-alt,.fa-broom,.fa-box-open,.fa-truck{
-    color: #BC6C25;
+    color: var(--cinza-escuro);
 }
 
 .feature-icon {
@@ -192,7 +188,7 @@ main {
 .section-title {
     text-align: center;
     margin: 3rem 0 2rem;
-    color: var(--preto);
+    color: var(--verde-principal);
     font-size: 2rem;
     position: relative;
 }
@@ -202,7 +198,7 @@ main {
     display: block;
     width: 100px;
     height: 4px;
-    background-color: var(--preto);
+    background-color: var(--verde-claro);
     margin: 0.5rem auto 0;
 }
 
@@ -215,7 +211,7 @@ main {
 }
 
 .rewards-section h2 {
-    color: var(--preto);
+    color: var(--verde-principal);
     text-align: center;
     margin-bottom: 2rem;
 }
