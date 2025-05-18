@@ -1,0 +1,161 @@
+/* === estilo-ecoponto.css === */
+
+/* Layout geral */
+body {
+  margin: 0;
+  font-family: var(--fonte);
+  background-color: #f9fafb;
+  color: #111827;
+}
+:root {
+    --verde--primario: #2E7D32;
+    --texto--principal: #212121;
+    --erro--aviso: #D32F2F;
+    --confirmacao: #66BB6A;
+    --fundo--claro: #F5F5F5;
+    --laranja--destaque1: #DDA15E;
+    --laranja--destaque2: #BC6C25;
+    --fonte: "Lora", sans-serif;
+}
+.header {
+  background-color: var(--verde--primario); /* Verde escuro */
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
+}
+
+.voltar {
+  color: var(--texto--principal);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.formulario {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.titulo {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.subtitulo {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.campo label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}
+
+.campo input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 0.375rem;
+  background-color: #f6ad55; /* laranja claro */
+}
+
+.campo-duplo {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.botao-validar {
+  background-color: #dd6b20;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+}
+
+.mensagem-erro {
+  color: red;
+  font-size: 0.85rem;
+  display: none;
+}
+
+.campo-linha {
+  display: flex;
+  gap: 3rem;
+}
+
+.botoes {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.botao-encontrar {
+  background-color: #38a169;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 0.375rem;
+  text-decoration: none;
+  text-align: center;
+}
+
+.botao-cancelar {
+  background-color: white;
+  color: #38a169;
+  border: 2px solid #38a169;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+}
+
+.informativo {
+  flex: 1;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.imagem-lixo {
+  max-width: 100%;
+  margin-top: 1rem;
+}
+
+@media
+(max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .formulario {
+    width: 100%;
+  }
+  .informativo {
+    width: 100%;
+  }
+  .campo-duplo {
+    flex-direction: column;
+  }
+  .campo-linha {
+    flex-direction: column;
+  }
+  
+}

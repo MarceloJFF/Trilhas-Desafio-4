@@ -1,0 +1,208 @@
+/* File: styles/estiloEcopontoProximo1e2.css */
+
+body {
+    margin: 0;
+    font-family: var(--fonte);
+    background-color: var(--fundo--claro);
+    color: var(--texto--principal);
+}
+:root {
+    --verde--primario: #2E7D32;
+    --texto--principal: #212121;
+    --erro--aviso: #D32F2F;
+    --confirmacao: #66BB6A;
+    --fundo--claro: #F5F5F5;
+    --laranja--destaque1: #DDA15E;
+    --laranja--destaque2: #BC6C25;
+    --fonte: "Lora", sans-serif;
+}
+header {
+    background-color: var(--verde--primario);
+    padding: 1rem;
+    color: var(--fundo--claro);
+}
+
+.topo__ecoponto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.conjunto__header2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 90%;
+    max-width: 1200px;
+}
+
+.conjunto__header__imagem__voltar {
+    display: flex;
+    align-items: center;
+}
+
+.imagem__voltar {
+    width: 40px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.nome__ecoponto__encontrado {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    flex: 1;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    flex-direction: column;
+    align-items: center;
+}
+
+.conjunto__econponto__encontrado {
+    width: 90%;
+    max-width: 1200px;
+}
+
+.retangulo__fundo {
+    background-color: var(--laranja--destaque1);
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.nome__ecoponto__estilo {
+    font-size: 1.3rem;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.estilo__endereco,
+.estilo__horario {
+    display: block;
+    font-size: 1rem;
+    margin: 0.5rem 0;
+}
+
+.destaque__endereco {
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+.conjunto__tipos__aceitos {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.conjunto__retangulo__dupla {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.preencher__valores {
+    flex: 1;
+    background-color: var(--fundo--claro);
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.conjunto__imagem__valores {
+    text-align: center;
+}
+
+.tamanho__imagens__ecoponto__encontrado {
+    width: 50px;
+    height: auto;
+    margin-bottom: 0.5rem;
+}
+
+.conjunto__lixo__eletronico {
+    margin-top: 1rem;
+}
+
+.preencher__eletronico {
+    background-color: #fffde7;
+    border-left: 4px solid #fbc02d;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.botoes__ecoponto__encontrado {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.botao__inscrever,
+.botao__preparar__lixo {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.botao__inscrever:hover,
+.botao__preparar__lixo:hover {
+    background-color: #388e3c;
+}
+
+.conjunto__localizacao {
+    text-align: center;
+}
+
+.retangulo__mapa {
+    height: 300px;
+    background-color: var(--fundo--claro);
+    margin-top: 1rem;
+    border-radius: 12px;
+}
+
+footer {
+    height: 100px;
+    background-color: #4caf50;
+    margin-top: 2rem;
+}
+@media (max-width: 768px) {
+    .conjunto__header2 {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .imagem__voltar {
+        width: 30px;
+    }
+
+    .nome__ecoponto__encontrado {
+        font-size: 1.2rem;
+    }
+
+    .tamanho__imagens__ecoponto__encontrado {
+        width: 40px;
+    }
+}
