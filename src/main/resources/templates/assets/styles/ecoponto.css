@@ -1,0 +1,41 @@
+body {
+  background: linear-gradient(135deg, #d7f3e3, #a8d5ba);
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding-bottom: 3rem;
+}
+.navbar.bg-success {
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+h1.h3 {
+  color: #2e7d32;
+  font-weight: 700;
+  text-shadow: 0 1px 1px #b0d8b6;
+}
+.list-group-item {
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(46,125,50,0.1);
+  transition: box-shadow 0.3s ease;
+}
+.list-group-item:hover {
+  box-shadow: 0 4px 12px rgba(46,125,50,0.2);
+}
+.btn-primary {
+  background-color: #2e7d32;
+  border-color: #2e7d32;
+  font-weight: 600;
+}
+.btn-primary:hover {
+  background-color: #145214;
+  border-color: #145214;
+}
+/* Modal header color */
+.modal-header {
+  background-color: #a8d5ba;
+  color: #1b3d1b;
+  font-weight: 600;
+}
+/* Modal footer button spacing */
+.modal-footer button {
+  min-width: 120px;
+}

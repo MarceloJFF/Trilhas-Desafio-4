@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cadastro de Empresa - EcoPonto</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="assets/styles/ecoponto.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="container py-5" style="max-width: 600px;">
+    <div class="card p-4 shadow rounded-4 bg-light">
+      <h2 class="text-center text-success mb-4"><i class="bi bi-building me-2"></i>Cadastro de Empresa</h2>
+      <form action="/cadastro/Empresa" method="POST" novalidate>
+        <div class="mb-3">
+          <label for="nome" class="form-label">Nome da Empresa</label>
+          <div class="input-group">
+            <span class="input-group-text bg-success text-white"><i class="bi bi-building"></i></span>
+            <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome completo da empresa" required />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="cnpj" class="form-label">CNPJ</label>
+          <div class="input-group">
+            <span class="input-group-text bg-success text-white"><i class="bi bi-credit-card-2-front-fill"></i></span>
+            <input type="text" class="form-control" id="cnpj" name="cnpj" placeholder="00.000.000/0000-00" required />
+          </div>
+        </div>
+
+        <hr />
+
+        <h4 class="text-success mb-3"><i class="bi bi-geo-alt-fill me-2"></i>Endereço</h4>
+
+        <div class="mb-3">
+          <label for="cep" class="form-label">CEP</label>
+          <div class="input-group">
+            <span class="input-group-text bg-success text-white"><i class="bi bi-postage-fill"></i></span>
+            <input type="text" class="form-control" id="cep" name="cep" placeholder="00000-000" required />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="logradouro" class="form-label">Logradouro</label>
+          <div class="input-group">
+            <span class="input-group-text bg-success text-white"><i class="bi bi-house-fill"></i></span>
+            <input type="text" class="form-control" id="logradouro" name="logradouro" placeholder="Rua, Avenida..." required />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="bairro" class="form-label">Bairro</label>
+          <div class="input-group">
+            <span class="input-group-text bg-success text-white"><i class="bi bi-building"></i></span>
+            <input type="text" class="form-control" id="bairro" name="bairro" placeholder="Bairro" required />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="complemento" class="form-label">Complemento</label>
+          <div class="input-group">
+            <span class="input-group-text bg-success text-white"><i class="bi bi-info-circle"></i></span>
+            <input type="text" class="form-control" id="complemento" name="complemento" placeholder="Apartamento, sala, etc." />
+          </div>
+        </div>
+
+        <hr />
+
+        <h4 class="text-success mb-3"><i class="bi bi-person-circle me-2"></i>Dados de Acesso</h4>
+
+        <div class="mb-3">
+          <label for="login" class="form-label">Login</label>
+          <div class="input-group">
+            <span class="input-group-text bg-success text-white"><i class="bi bi-person-fill"></i></span>
+            <input type="text" class="form-control" id="login" name="login" placeholder="Login para acesso" required />
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label for="password" class="form-label">Senha</label>
+          <div class="input-group">
+            <span class="input-group-text bg-success text-white"><i class="bi bi-lock-fill"></i></span>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Senha segura" required />
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-success w-100"><i class="bi bi-building-add me-2"></i>Cadastrar Empresa</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
