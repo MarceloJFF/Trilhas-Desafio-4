@@ -32,10 +32,21 @@ public class Ecoponto {
     @Column(name = "aceita_lixo_eletronico", nullable = false)
     public Boolean aceitaLixoEletronico;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "id_acesso", nullable = false)
     public Acesso acesso;
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "id_endereco", nullable = false)
     public Endereco endereco;
+
+    @Override
+    public String toString() {
+        return "Ecoponto{" +
+                "id=" + id +
+                ", descricao='" + descricao + '\'' +
+                ", cep='" + cep + '\'' +
+                // NÃO inclua acesso.toString() aqui!
+                '}';
+    }
+
 }

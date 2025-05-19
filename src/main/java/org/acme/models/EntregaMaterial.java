@@ -23,4 +23,8 @@ public class EntregaMaterial {
     @ManyToOne
     @JoinColumn(name = "id_ecoponto")
     private Ecoponto ecoponto;
+    @ManyToOne
+    @JoinColumn(name = "id_status")
+    private StatusSolicitacao status;
+
 }

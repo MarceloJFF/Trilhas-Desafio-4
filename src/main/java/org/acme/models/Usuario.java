@@ -17,9 +17,9 @@ public class Usuario {
     private String cpf;
     private Long saldoPontos;
 
-    @ManyToOne @JoinColumn(name = "id_endereco")
+    @OneToOne @JoinColumn(name = "id_endereco")
     private Endereco endereco;
 
-    @ManyToOne @JoinColumn(name = "id_acesso")
+    @OneToOne @JoinColumn(name = "id_acesso")
     private Acesso acesso;
 }

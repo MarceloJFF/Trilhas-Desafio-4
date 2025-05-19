@@ -10,7 +10,9 @@ public class TipoLixoAceitoEcoponto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "pontos_kg")
     private Double pontosKg;
+
     private String img;
 
     @ManyToOne

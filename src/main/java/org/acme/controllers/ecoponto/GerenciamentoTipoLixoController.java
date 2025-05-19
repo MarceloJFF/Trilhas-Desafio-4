@@ -1,6 +1,7 @@
 package org.acme.controllers.ecoponto;
 
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -24,39 +25,70 @@ public class GerenciamentoTipoLixoController {
 
     @Inject
     TipoLixoRepository tipoLixoRepo;
-
     @POST
-    @Path("/tipo-lixo-aceito")
+    @Path("/salvar")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response cadastrarTipoLixoAceito(
-            @FormParam("pontosKg") Double pontosKg,
-            @FormParam("img") String img,
-            @FormParam("idEcoponto") Long idEcoponto,
-            @FormParam("idTipoLixo") Long idTipoLixo) {
+    @Transactional
+    public Response salvarTiposLixo(
 
-        boolean jaExiste = tipoLixoAceitoRepo.existsByEcopontoAndTipoLixo(idEcoponto, idTipoLixo);
-        if (jaExiste) {
-            return Response.status(Response.Status.CONFLICT)
-                    .entity("Este tipo de lixo já foi cadastrado para este ecoponto.")
-                    .build();
-        }
+            @FormParam("aceito_plastico") String aceitoPlastico,
+            @FormParam("pontos_plastico") Double pontosPlastico,
 
-        TipoLixoAceitoEcoponto novo = new TipoLixoAceitoEcoponto();
-        novo.setPontosKg(pontosKg);
-        novo.setImg(img);
-        novo.setEcoponto(ecopontoRepo.findById(idEcoponto));
-        novo.setTipoLixo(tipoLixoRepo.findById(idTipoLixo));
+            @FormParam("aceito_vidro") String aceitoVidro,
+            @FormParam("pontos_vidro") Double pontosVidro,
 
-        tipoLixoAceitoRepo.persist(novo);
+            @FormParam("aceito_papel") String aceitoPapel,
+            @FormParam("pontos_papel") Double pontosPapel,
 
-        return Response.status(Response.Status.CREATED).build();
+            @FormParam("aceito_metal") String aceitoMetal,
+            @FormParam("pontos_metal") Double pontosMetal,
+            @FormParam("aceito_eletronico") String aceitoEletronico,
+            @FormParam("pontos_eletronico") Double pontosEletronico
+
+    ) {
+        atualizarOuCriar("Vidro", aceitoVidro, pontosVidro, 1L);
+        atualizarOuCriar("Papel", aceitoPapel, pontosPapel, 1L);
+        atualizarOuCriar("Metal", aceitoMetal, pontosMetal, 1L);
+        atualizarOuCriar("Plastico",aceitoPlastico, pontosPlastico, 1L);
+        atualizarOuCriar("Eletronico",aceitoEletronico, pontosEletronico, 1L);
+
+
+
+        return Response.ok("Tipos de lixo atualizados").build();
     }
+
+
+    private void atualizarOuCriar(String nomeTipo, String aceito, Double pontos, Long idEcoponto) {
+        Long idTipo = tipoLixoRepo.findByNome(nomeTipo).getId();
+        TipoLixoAceitoEcoponto existente = tipoLixoAceitoRepo.findByEcopontoAndTipoLixo(idEcoponto, idTipo);
+
+        if (aceito != null) {
+            if (existente == null) {
+                // Criar
+                TipoLixoAceitoEcoponto novo = new TipoLixoAceitoEcoponto();
+                novo.setEcoponto(ecopontoRepo.findById(idEcoponto));
+                novo.setTipoLixo(tipoLixoRepo.findById(idTipo));
+                novo.setPontosKg(pontos);
+                tipoLixoAceitoRepo.persist(novo);
+            } else {
+                // Atualizar
+                existente.setPontosKg(pontos);
+                tipoLixoAceitoRepo.persist(existente);
+            }
+        } else {
+            if (existente != null) {
+                // Remover
+                tipoLixoAceitoRepo.delete(existente);
+            }
+        }
+    }
+
 
     @GET
     @Path("/tipos-lixo-aceitos/{idEcoponto}")
     public Response listarTiposLixoAceitos(@PathParam("idEcoponto") Long idEcoponto) {
         List<TipoLixoAceitoEcoponto> tiposAceitos = tipoLixoAceitoRepo.findByEcopontoId(idEcoponto);
-
+        System.out.println(tiposAceitos);
         return Response.ok(tiposAceitos).build();
     }
 
