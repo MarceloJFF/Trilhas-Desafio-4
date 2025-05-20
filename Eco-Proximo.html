@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Ecoponto Próximo</title>
+    <link rel="stylesheet" href="./assets/estiloEco.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <h3>Ecopontos</h3>
+        <div class="nav-links">
+            <a href="Acoes-Voluntarias.html">Ações Voluntárias</a>
+            <a href="Eco-Proximo.html">Buscar Ecoponto</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 class="main-title">Buscar Ecoponto Próximo</h1>
+        <form action="#" method="get" class="form-busca">
+            <div class="form-group">
+                <label for="cidade">Cidade:</label>
+                <input type="text" id="cidade" name="cidade" placeholder="Digite a cidade" class="form-control">
+            </div>
+            
+            <div class="form-group">
+                <label for="endereco">Endereço:</label>
+                <input type="text" id="endereco" name="endereco" placeholder="Digite o endereço" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="bairro">Bairro:</label>
+                <input type="text" id="bairro" name="bairro" placeholder="Digite o bairro" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="complemento">Complemento:</label>
+                <input type="text" id="complemento" name="complemento" placeholder="Digite o complemento" class="form-control">
+            </div>
+
+            <button type="submit" class="btn-submit">Buscar</button>
+        </form>
+    </main>
+</body>
+</html>
