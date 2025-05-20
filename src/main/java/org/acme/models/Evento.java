@@ -15,7 +15,11 @@ public class Evento {
 
     private String descricao;
     private LocalDateTime createdAt;
-    private Long endereco;
+    
+    @ManyToOne
+    @JoinColumn(name = "endereco")
+    private Endereco endereco;
+    
     private String obs;
     private LocalDateTime dataEvento;
     private LocalTime horarioInicioFuncionamento;

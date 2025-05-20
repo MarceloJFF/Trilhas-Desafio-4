@@ -1,5 +1,7 @@
 package org.acme.controllers.ecoponto;
 
+import io.quarkus.qute.Template;
+import io.quarkus.qute.TemplateInstance;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
@@ -18,6 +20,9 @@ import java.util.List;
 public class GerenciamentoTipoLixoController {
 
     @Inject
+    Template conf_Ecoponto;
+
+    @Inject
     TipoLixoAceitoEcopontoRepository tipoLixoAceitoRepo;
 
     @Inject
@@ -25,26 +30,22 @@ public class GerenciamentoTipoLixoController {
 
     @Inject
     TipoLixoRepository tipoLixoRepo;
+
     @POST
     @Path("/salvar")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Transactional
-    public Response salvarTiposLixo(
-
+    public TemplateInstance salvarTiposLixo(
             @FormParam("aceito_plastico") String aceitoPlastico,
             @FormParam("pontos_plastico") Double pontosPlastico,
-
             @FormParam("aceito_vidro") String aceitoVidro,
             @FormParam("pontos_vidro") Double pontosVidro,
-
             @FormParam("aceito_papel") String aceitoPapel,
             @FormParam("pontos_papel") Double pontosPapel,
-
             @FormParam("aceito_metal") String aceitoMetal,
             @FormParam("pontos_metal") Double pontosMetal,
             @FormParam("aceito_eletronico") String aceitoEletronico,
             @FormParam("pontos_eletronico") Double pontosEletronico
-
     ) {
         atualizarOuCriar("Vidro", aceitoVidro, pontosVidro, 1L);
         atualizarOuCriar("Papel", aceitoPapel, pontosPapel, 1L);
@@ -52,9 +53,7 @@ public class GerenciamentoTipoLixoController {
         atualizarOuCriar("Plastico",aceitoPlastico, pontosPlastico, 1L);
         atualizarOuCriar("Eletronico",aceitoEletronico, pontosEletronico, 1L);
 
-
-
-        return Response.ok("Tipos de lixo atualizados").build();
+        return conf_Ecoponto.data("success", true);
     }
 
 
