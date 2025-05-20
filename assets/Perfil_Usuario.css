@@ -1,0 +1,113 @@
+body {
+  background-color: #f7faf6;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Barra de navegação */
+header {
+  background-color: #2e7d32;
+  padding: 10px 0;
+  color: #fff;
+}
+
+header .logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 20px;
+}
+
+header nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+header nav ul li {
+  margin: 0 15px;
+}
+
+header nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+header nav ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Layout do perfil */
+.container-custom {
+  display: flex;
+  max-width: 1200px;
+  margin: 50px auto;
+}
+
+.profile-left {
+  width: 250px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.profile-left img {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  border: 4px solid #2e7d32;
+  cursor: pointer;
+}
+
+.profile-header h3 {
+  color: #2e7d32;
+  font-size: 1.6rem;
+  margin-top: 15px;
+}
+
+.accordion-button {
+  background-color: #2e7d32;
+  color: #fff;
+}
+
+.profile-right {
+  flex: 1;
+  padding: 20px;
+}
+
+.btn-custom {
+  background-color: #2e7d32;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.btn-custom:hover {
+  background-color: #1e5d26;
+}
+
+.btn-edit {
+  background-color: #ffc107;
+  color: #fff;
+}
+
+.btn-edit:hover {
+  background-color: #e0a800;
+}
+
+.footer {
+  background-color: #2e7d32;
+  color: #fff;
+  padding: 20px 0;
+  margin-top: 50px;
+  text-align: center;
+  border-radius: 15px 15px 0 0;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 1.1rem;
+}

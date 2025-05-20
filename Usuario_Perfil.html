@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Perfil do Usuário - EcoPonto</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <!-- CSS Externo -->
+  <link rel="stylesheet" href="./assets/Perfil_Usuario.css">
+</head>
+<body>
+
+  <!-- Barra de Navegação -->
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <i class="fas fa-recycle"></i> <span>RECICLE</span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#" id="nav-ecopontos">Ecopontos Próximos</a></li>
+          <li><a href="#" id="nav-recompensas">Recompensa Verde</a></li>
+          <li><a href="#" id="nav-como-reciclar">Como Reciclar</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container-custom">
+    <!-- Coluna Lateral -->
+    <div class="profile-left">
+      <div class="text-center">
+        <img src="./assets/imagens/perfil-sem-foto.webp" alt="Foto de Perfil" class="img-fluid mb-3" data-bs-toggle="modal" data-bs-target="#editPhotoModal">
+        <h3>João da Silva</h3>
+      </div>
+
+      <!-- Accordion com Dados -->
+      <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Dados da Conta
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <p><strong>Nome:</strong> João da Silva</p>
+              <p><strong>CPF:</strong> 123.456.789-00</p>
+              <p><strong>Email:</strong> joao.silva@email.com</p>
+              <button class="btn btn-edit w-100" data-bs-toggle="modal" data-bs-target="#editProfileModal">Editar Dados</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Área Principal -->
+    <div class="profile-right">
+      <button class="btn btn-custom w-100 mb-3" id="viewBenefits">Olhar Meus Benefícios</button>
+
+      <!-- Histórico de Trocas -->
+      <div class="accordion" id="historyAccordion">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Ver Minhas Trocas
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#historyAccordion">
+            <div class="accordion-body">
+              <ul class="list-group">
+                <li class="list-group-item"><strong>Troca 1:</strong> Benefício X - <em>01/02/2023</em></li>
+                <li class="list-group-item"><strong>Troca 2:</strong> Benefício Y - <em>15/02/2023</em></li>
+                <li class="list-group-item"><strong>Troca 3:</strong> Benefício Z - <em>20/02/2023</em></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Próximos Eventos -->
+      <div class="mt-4">
+        <div class="accordion" id="eventsAccordion">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Ver Próximos Eventos
+              </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#eventsAccordion">
+              <div class="accordion-body">
+                <ul class="list-group">
+                  <li class="list-group-item"><strong>Evento 1:</strong> Evento de Coleta - <em>15/03/2023</em></li>
+                  <li class="list-group-item"><strong>Evento 2:</strong> Palestra Ambiental - <em>22/03/2023</em></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Foto -->
+  <div class="modal fade" id="editPhotoModal" tabindex="-1" aria-labelledby="editPhotoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editPhotoModalLabel">Alterar Foto de Perfil</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <input type="file" class="form-control" id="uploadPhoto">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary">Salvar Foto</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Perfil -->
+  <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editProfileModalLabel">Editar Perfil</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="editName" class="form-label">Nome</label>
+              <input type="text" class="form-control" id="editName" value="João da Silva">
+            </div>
+            <div class="mb-3">
+              <label for="editEmail" class="form-label">Email</label>
+              <input type="email" class="form-control" id="editEmail" value="joao.silva@email.com">
+            </div>
+            <div class="mb-3">
+              <label for="editAddress" class="form-label">Endereço</label>
+              <input type="text" class="form-control" id="editAddress" value="Rua ABC, 123">
+            </div>
+            <div class="mb-3">
+              <label for="editCPF" class="form-label">CPF</label>
+              <input type="text" class="form-control" id="editCPF" value="123.456.789-00">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary">Salvar Alterações</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

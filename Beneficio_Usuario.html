@@ -4,83 +4,159 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Benefícios Disponíveis - EcoPonto</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Alpine.js para interatividade mínima -->
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.0/dist/cdn.min.js" defer></script>
+  
+  <!-- Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  
+  <!-- Arquivo de estilos customizados -->
   <link href="assets/styles/ecoponto.css" rel="stylesheet" />
 </head>
-<body>
-  <!-- Navbar padrão da tela logada -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-    <div class="container">
-      <a class="navbar-brand" href="#"><i class="bi bi-recycle me-2"></i>EcoPonto</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
-        aria-controls="navMenu" aria-expanded="false" aria-label="Alternar navegação">
-        <span class="navbar-toggler-icon"></span>
+<body class="bg-gray-100" x-data="{ open: false, modalOpen: false, trocaModal: false }">
+  
+  <!-- Navbar -->
+  <nav class="bg-green-700">
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="#" class="text-white text-xl font-bold flex items-center">
+        <i class="bi bi-recycle mr-2"></i>EcoPonto
+      </a>
+      <!-- Menu Desktop -->
+      <div class="hidden md:flex space-x-6">
+        <a href="pontos.html" class="text-white hover:underline">Início</a>
+        <a href="beneficios.html" class="text-white hover:underline font-semibold">Benefícios</a>
+        <a href="#" class="text-white hover:underline" @click.prevent="modalOpen = true">Minhas Solicitações</a>
+        <a href="eventos.html" class="text-white hover:underline">Eventos</a>
+        <a href="perfil.html" class="text-white hover:underline">Perfil</a>
+        <a href="logout.html" class="text-white hover:underline">Sair</a>
+      </div>
+      <!-- Menu Mobile -->
+      <button class="md:hidden text-white focus:outline-none" @click="open = !open">
+        <svg class="w-6 h-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+             stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
       </button>
-      <div class="collapse navbar-collapse" id="navMenu">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="pontos.html">Início</a></li>
-          <li class="nav-item"><a class="nav-link active" href="beneficios.html">Benefícios</a></li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#minhasSolicitacoesModal">Minhas Solicitações</a>
-          </li>
-          <li class="nav-item"><a class="nav-link" href="eventos.html">Eventos</a></li>
-          <li class="nav-item"><a class="nav-link" href="perfil.html">Perfil</a></li>
-          <li class="nav-item"><a class="nav-link" href="logout.html">Sair</a></li>
-        </ul>
+    </div>
+    <div class="md:hidden" x-show="open" @click.outside="open = false">
+      <div class="px-4 pb-4 space-y-2 bg-green-600">
+        <a href="pontos.html" class="block text-white hover:underline">Início</a>
+        <a href="beneficios.html" class="block text-white hover:underline font-semibold">Benefícios</a>
+        <a href="#" class="block text-white hover:underline" @click.prevent="modalOpen = true">Minhas Solicitações</a>
+        <a href="eventos.html" class="block text-white hover:underline">Eventos</a>
+        <a href="perfil.html" class="block text-white hover:underline">Perfil</a>
+        <a href="logout.html" class="block text-white hover:underline">Sair</a>
       </div>
     </div>
   </nav>
-
-  <main class="container mt-4">
-    <h2 class="mb-4 text-white">Benefícios Disponíveis</h2>
-
-    <div class="list-group">
-      <div class="list-group-item d-flex justify-content-between align-items-center">
+  
+  <!-- Conteúdo Principal -->
+  <main class="container mx-auto mt-8 px-4">
+    <h2 class="mb-6 text-2xl font-bold text-green-700">Benefícios Disponíveis</h2>
+    <div class="space-y-4">
+      
+      <!-- Benefício Item 1 -->
+      <div class="flex justify-between items-center p-4 bg-white rounded-lg shadow">
         <div>
-          <p class="mb-1">Desconto de 10% na Loja Parceira XYZ</p>
-          <small class="text-muted">Custo: 50 pontos</small>
+          <p class="text-gray-800 font-medium">Desconto de 10% na Loja Parceira XYZ</p>
+          <small class="text-gray-500">Custo: 50 pontos</small>
         </div>
-        <button class="btn btn-primary btn-sm">Trocar Benefício</button>
+        <button class="bg-blue-500 hover:bg-blue-600 text-white text-sm font-bold py-1 px-3 rounded"
+                @click="trocaModal = true">
+          Trocar Benefício
+        </button>
       </div>
-
-      <div class="list-group-item d-flex justify-content-between align-items-center">
+      
+      <!-- Benefício Item 2 -->
+      <div class="flex justify-between items-center p-4 bg-white rounded-lg shadow">
         <div>
-          <p class="mb-1">Ingresso para evento sustentável</p>
-          <small class="text-muted">Custo: 100 pontos</small>
+          <p class="text-gray-800 font-medium">Ingresso para evento sustentável</p>
+          <small class="text-gray-500">Custo: 100 pontos</small>
         </div>
-        <button class="btn btn-primary btn-sm">Trocar Benefício</button>
+        <button class="bg-blue-500 hover:bg-blue-600 text-white text-sm font-bold py-1 px-3 rounded"
+                @click="trocaModal = true">
+          Trocar Benefício
+        </button>
       </div>
-      <!-- Mais benefícios aqui -->
+      <!-- Adicione outros benefícios conforme necessário -->
     </div>
   </main>
-
-  <!-- Modal Minhas Solicitações -->
-  <div class="modal fade" id="minhasSolicitacoesModal" tabindex="-1" aria-labelledby="minhasSolicitacoesModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header bg-success text-white">
-          <h5 class="modal-title" id="minhasSolicitacoesModalLabel"><i class="bi bi-list-check me-2"></i>Minhas Solicitações</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
-        </div>
-        <div class="modal-body">
-          <ul class="list-group">
-            <li class="list-group-item">
-              <strong>Ecoponto Central</strong> - Plástico - 5 kg - Status: <span class="badge bg-warning text-dark">Pendente</span>
-            </li>
-            <li class="list-group-item">
-              <strong>ReciclaMais Ltda</strong> - Vidro - 3 kg - Status: <span class="badge bg-success">Aceito</span>
-            </li>
-            <!-- Mais solicitações aqui -->
-          </ul>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-circle me-1"></i>Fechar</button>
-        </div>
+  
+  <!-- Modal: Minhas Solicitações -->
+  <div x-show="modalOpen"
+       class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+       x-transition
+       style="display: none;">
+    <div class="bg-white rounded-lg overflow-hidden max-w-lg w-full">
+      <!-- Cabeçalho do Modal -->
+      <div class="bg-green-700 px-4 py-2 flex justify-between items-center">
+        <h5 class="text-white font-bold flex items-center">
+          <i class="bi bi-list-check mr-2"></i>Minhas Solicitações
+        </h5>
+        <button @click="modalOpen = false" class="text-white focus:outline-none">
+          <i class="bi bi-x-circle"></i>
+        </button>
+      </div>
+      <!-- Corpo do Modal -->
+      <div class="p-4">
+        <ul class="space-y-2">
+          <li class="border-b pb-2">
+            <strong>Ecoponto Central</strong> - Plástico - 5 kg - Status: 
+            <span class="bg-yellow-300 text-black px-2 rounded">Pendente</span>
+          </li>
+          <li class="border-b pb-2">
+            <strong>ReciclaMais Ltda</strong> - Vidro - 3 kg - Status: 
+            <span class="bg-green-200 text-green-800 px-2 rounded">Aceito</span>
+          </li>
+          <!-- Mais solicitações aqui -->
+        </ul>
+      </div>
+      <!-- Rodapé do Modal -->
+      <div class="px-4 py-2 bg-gray-100 text-right">
+        <button @click="modalOpen = false"
+                class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-1 px-3 rounded inline-flex items-center">
+          <i class="bi bi-x-circle mr-1"></i>Fechar
+        </button>
       </div>
     </div>
   </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Modal: Confirmação da Troca de Benefício -->
+  <div x-show="trocaModal"
+       class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+       x-transition
+       style="display: none;">
+    <div class="bg-white rounded-lg overflow-hidden max-w-md w-full">
+      <!-- Cabeçalho -->
+      <div class="bg-blue-600 px-4 py-2 flex justify-between items-center">
+        <h5 class="text-white font-bold">Confirmar Troca</h5>
+        <button @click="trocaModal = false" class="text-white focus:outline-none">
+          <i class="bi bi-x-circle"></i>
+        </button>
+      </div>
+      <!-- Corpo -->
+      <div class="p-4">
+        <p class="text-gray-800">
+          Você tem certeza que deseja trocar seus pontos por este benefício?
+        </p>
+      </div>
+      <!-- Rodapé -->
+      <div class="px-4 py-2 bg-gray-100 text-right">
+        <button @click="trocaModal = false; alert('Benefício trocado!');"
+                class="bg-green-600 hover:bg-green-700 text-white font-bold py-1 px-3 rounded">
+          Confirmar
+        </button>
+        <button @click="trocaModal = false"
+                class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-1 px-3 rounded ml-2">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+  
 </body>
 </html>
