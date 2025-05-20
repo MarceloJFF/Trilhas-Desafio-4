@@ -1,57 +1,41 @@
 package org.acme.controllers;
 
-import io.quarkus.qute.Template;
-import io.quarkus.qute.TemplateInstance;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.UriBuilder;
-import org.acme.models.Acesso;
-import org.acme.repositories.AcessoRepository;
-import org.acme.util.PasswordUtil;
-
-import java.net.URI;
+import org.acme.dto.LoginDTO;
+import org.acme.dto.TokenResponseDTO;
+import org.acme.entities.Login;
+import org.acme.repositories.LoginRepository;
+import org.acme.security.JwtTokenProvider;
+import org.acme.utils.PasswordUtil;
 
 @Path("/login")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class LoginController {
 
     @Inject
-    AcessoRepository acessoRepository;
+    LoginRepository loginRepository;
 
     @Inject
-    Template login; // injeta template login.qute.html
+    JwtTokenProvider jwtTokenProvider;
 
     @POST
     @Transactional
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    @Produces(MediaType.TEXT_HTML)
-    public Object handleLogin(@FormParam("login") String loginInput,
-                                        @FormParam("password") String password) {
+    public Response handleLogin(LoginDTO loginDTO) {
+        Login login = loginRepository.findByLogin(loginDTO.getLogin());
 
-        Acesso acesso = acessoRepository.findByLogin(loginInput);
-
-        if (acesso == null || !PasswordUtil.check(password, acesso.getPassword())) {
-            return login.data("erro", "Login ou senha inválidos.").data("sucesso",false);
+        if (login == null || !PasswordUtil.check(loginDTO.getPassword(), login.getPassword())) {
+            return Response.status(Response.Status.UNAUTHORIZED)
+                    .entity("Login ou senha inválidos.")
+                    .build();
         }
 
-        if (acesso.getUsuario() != null) {
-            //return TemplateInstance.redirect("/usuario");
-            URI loginUri = UriBuilder.fromPath("/usuario").build();
-            return Response.seeOther(loginUri).build();
-        } else if (acesso.getEcoponto() != null) {
-            URI loginUri = UriBuilder.fromPath("eco-gerenciar").build();
-            return Response.seeOther(loginUri).build();
-        }
-        return login.data("erro", "Tipo de usuário não reconhecido.");
+        String token = jwtTokenProvider.generateToken(login.getLogin(), login.getTipo());
+        return Response.ok(new TokenResponseDTO(token, login.getTipo(), login.getLogin())).build();
     }
-//    @GET
-//    @Path("/login")
-//    @Produces(MediaType.TEXT_HTML)
-//    public TemplateInstance loginEmpresa(@QueryParam("sucesso") boolean sucesso) {
-//        return login.data("sucesso", sucesso);
-//    }
-
 }
 

@@ -7,20 +7,19 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.acme.dto.TipoLixoAceitoEcopontoDTO;
 import org.acme.models.TipoLixoAceitoEcoponto;
 import org.acme.repositories.EcopontoRepository;
 import org.acme.repositories.TipoLixoAceitoEcopontoRepository;
 import org.acme.repositories.TipoLixoRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Path("/gerenciamento-ecoponto-tipo-lixo")
-@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class GerenciamentoTipoLixoController {
-
-    @Inject
-    Template conf_Ecoponto;
 
     @Inject
     TipoLixoAceitoEcopontoRepository tipoLixoAceitoRepo;
@@ -32,75 +31,99 @@ public class GerenciamentoTipoLixoController {
     TipoLixoRepository tipoLixoRepo;
 
     @POST
-    @Path("/salvar")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Path("/{idEcoponto}/salvar")
     @Transactional
-    public TemplateInstance salvarTiposLixo(
-            @FormParam("aceito_plastico") String aceitoPlastico,
-            @FormParam("pontos_plastico") Double pontosPlastico,
-            @FormParam("aceito_vidro") String aceitoVidro,
-            @FormParam("pontos_vidro") Double pontosVidro,
-            @FormParam("aceito_papel") String aceitoPapel,
-            @FormParam("pontos_papel") Double pontosPapel,
-            @FormParam("aceito_metal") String aceitoMetal,
-            @FormParam("pontos_metal") Double pontosMetal,
-            @FormParam("aceito_eletronico") String aceitoEletronico,
-            @FormParam("pontos_eletronico") Double pontosEletronico
+    public Response salvarTiposLixo(
+            @PathParam("idEcoponto") Long idEcoponto,
+            List<TipoLixoAceitoEcopontoDTO> tiposLixo
     ) {
-        atualizarOuCriar("Vidro", aceitoVidro, pontosVidro, 1L);
-        atualizarOuCriar("Papel", aceitoPapel, pontosPapel, 1L);
-        atualizarOuCriar("Metal", aceitoMetal, pontosMetal, 1L);
-        atualizarOuCriar("Plastico",aceitoPlastico, pontosPlastico, 1L);
-        atualizarOuCriar("Eletronico",aceitoEletronico, pontosEletronico, 1L);
+        if (!ecopontoRepo.existsById(idEcoponto)) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("Ecoponto não encontrado")
+                    .build();
+        }
 
-        return conf_Ecoponto.data("success", true);
+        for (TipoLixoAceitoEcopontoDTO tipoLixoDTO : tiposLixo) {
+            atualizarOuCriar(tipoLixoDTO, idEcoponto);
+        }
+
+        return listarTiposLixoAceitos(idEcoponto);
     }
 
+    private void atualizarOuCriar(TipoLixoAceitoEcopontoDTO dto, Long idEcoponto) {
+        TipoLixoAceitoEcoponto existente = tipoLixoAceitoRepo.findByEcopontoAndTipoLixo(idEcoponto, dto.getTipoLixoId());
 
-    private void atualizarOuCriar(String nomeTipo, String aceito, Double pontos, Long idEcoponto) {
-        Long idTipo = tipoLixoRepo.findByNome(nomeTipo).getId();
-        TipoLixoAceitoEcoponto existente = tipoLixoAceitoRepo.findByEcopontoAndTipoLixo(idEcoponto, idTipo);
-
-        if (aceito != null) {
-            if (existente == null) {
-                // Criar
-                TipoLixoAceitoEcoponto novo = new TipoLixoAceitoEcoponto();
-                novo.setEcoponto(ecopontoRepo.findById(idEcoponto));
-                novo.setTipoLixo(tipoLixoRepo.findById(idTipo));
-                novo.setPontosKg(pontos);
-                tipoLixoAceitoRepo.persist(novo);
-            } else {
-                // Atualizar
-                existente.setPontosKg(pontos);
-                tipoLixoAceitoRepo.persist(existente);
-            }
+        if (existente == null) {
+            // Criar novo
+            TipoLixoAceitoEcoponto novo = new TipoLixoAceitoEcoponto();
+            novo.setEcoponto(ecopontoRepo.findById(idEcoponto));
+            novo.setTipoLixo(tipoLixoRepo.findById(dto.getTipoLixoId()));
+            novo.setPontosKg(dto.getPontosKg());
+            novo.setImg(dto.getImg());
+            tipoLixoAceitoRepo.persist(novo);
         } else {
-            if (existente != null) {
-                // Remover
-                tipoLixoAceitoRepo.delete(existente);
-            }
+            // Atualizar existente
+            existente.setPontosKg(dto.getPontosKg());
+            existente.setImg(dto.getImg());
+            tipoLixoAceitoRepo.persist(existente);
         }
     }
 
-
     @GET
-    @Path("/tipos-lixo-aceitos/{idEcoponto}")
+    @Path("/{idEcoponto}/tipos-lixo-aceitos")
     public Response listarTiposLixoAceitos(@PathParam("idEcoponto") Long idEcoponto) {
+        if (!ecopontoRepo.existsById(idEcoponto)) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("Ecoponto não encontrado")
+                    .build();
+        }
+
         List<TipoLixoAceitoEcoponto> tiposAceitos = tipoLixoAceitoRepo.findByEcopontoId(idEcoponto);
-        System.out.println(tiposAceitos);
-        return Response.ok(tiposAceitos).build();
+        List<TipoLixoAceitoEcopontoDTO> tiposAceitosDTO = tiposAceitos.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+
+        return Response.ok(tiposAceitosDTO).build();
+    }
+
+    private TipoLixoAceitoEcopontoDTO convertToDTO(TipoLixoAceitoEcoponto tipoLixoAceito) {
+        TipoLixoAceitoEcopontoDTO dto = new TipoLixoAceitoEcopontoDTO();
+        dto.setId(tipoLixoAceito.getId());
+        dto.setPontosKg(tipoLixoAceito.getPontosKg());
+        dto.setImg(tipoLixoAceito.getImg());
+        dto.setEcopontoId(tipoLixoAceito.getEcoponto().getId());
+        dto.setTipoLixoId(tipoLixoAceito.getTipoLixo().getId());
+        return dto;
     }
 
     @DELETE
-    @Path("/tipo-lixo-aceito/{id}")
-    public Response excluirTipoLixoAceito(@PathParam("id") Long id) {
+    @Path("/{idEcoponto}/tipo-lixo-aceito/{id}")
+    public Response excluirTipoLixoAceito(
+            @PathParam("idEcoponto") Long idEcoponto,
+            @PathParam("id") Long id
+    ) {
+        if (!ecopontoRepo.existsById(idEcoponto)) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("Ecoponto não encontrado")
+                    .build();
+        }
+
+        TipoLixoAceitoEcoponto tipoLixoAceito = tipoLixoAceitoRepo.findById(id);
+        if (tipoLixoAceito == null || !tipoLixoAceito.getEcoponto().getId().equals(idEcoponto)) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("Tipo de lixo aceito não encontrado")
+                    .build();
+        }
+
         boolean deleted = tipoLixoAceitoRepo.deleteById(id);
         if (deleted) {
-            return Response.ok().entity("Tipo de lixo aceito excluído com sucesso").build();
+            return Response.ok()
+                    .entity("Tipo de lixo aceito excluído com sucesso")
+                    .build();
         } else {
-            return Response.status(Response.Status.NOT_FOUND).entity("Tipo de lixo aceito não encontrado").build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Erro ao excluir tipo de lixo aceito")
+                    .build();
         }
     }
-
-
 }

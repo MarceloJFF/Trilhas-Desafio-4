@@ -5,18 +5,22 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.acme.dto.EventoDTO;
+import org.acme.models.Endereco;
 import org.acme.models.Evento;
 import org.acme.models.Ecoponto;
-import org.acme.repositories.EcopontoRepository;
 import org.acme.repositories.EventoRepository;
+import org.acme.repositories.EcopontoRepository;
+import org.acme.repositories.EnderecoRepository;
+import org.acme.repositories.InscricaoRepository;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Path("/eventos")
 @Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+@Consumes(MediaType.APPLICATION_JSON)
 public class EventoController {
 
     @Inject
@@ -25,13 +29,21 @@ public class EventoController {
     @Inject
     EcopontoRepository ecopontoRepo;
 
-    // ✅ LISTAR TODOS
+    @Inject
+    EnderecoRepository enderecoRepo;
+
+    @Inject
+    InscricaoRepository inscricaoRepo;
+
     @GET
-    public List<Evento> listar() {
-        return eventoRepo.listAll();
+    public Response listarTodos() {
+        List<Evento> eventos = eventoRepo.listAll();
+        List<EventoDTO> eventosDTO = eventos.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+        return Response.ok(eventosDTO).build();
     }
 
-    // ✅ BUSCAR POR ID
     @GET
     @Path("/{id}")
     public Response buscarPorId(@PathParam("id") Long id) {
@@ -39,89 +51,88 @@ public class EventoController {
         if (evento == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.ok(evento).build();
+        return Response.ok(convertToDTO(evento)).build();
     }
 
-    // ✅ CRIAR
-    @POST
-    @Transactional
-    public Response criar(
-            @FormParam("descricao") String descricao,
-            @FormParam("createdAt") String createdAtStr,
-            @FormParam("endereco") Long endereco,
-            @FormParam("obs") String obs,
-            @FormParam("dataEvento") String dataEventoStr,
-            @FormParam("horarioInicioFuncionamento") String horarioInicioStr,
-            @FormParam("horarioTerminoFuncionamento") String horarioTerminoStr,
-            @FormParam("beneficiosDisponiveis") Long beneficiosDisponiveis,
-            @FormParam("foto") String foto,
-            @FormParam("idEcoponto") Long idEcoponto
-    ) {
-        Evento evento = new Evento();
-        evento.setDescricao(descricao);
-        evento.setCreatedAt(LocalDateTime.parse(createdAtStr));
-        evento.setEndereco(endereco);
-        evento.setObs(obs);
-        evento.setDataEvento(LocalDateTime.parse(dataEventoStr));
-        evento.setHorarioInicioFuncionamento(LocalTime.parse(horarioInicioStr));
-        evento.setHorarioTerminoFuncionamento(LocalTime.parse(horarioTerminoStr));
-        evento.setBeneficiosDisponiveis(beneficiosDisponiveis);
-        evento.setFoto(foto);
-
-        Ecoponto ecoponto = ecopontoRepo.findById(idEcoponto);
-        if (ecoponto == null) {
-            return Response.status(Response.Status.BAD_REQUEST)
-                    .entity("Ecoponto não encontrado").build();
-        }
-        evento.setEcoponto(ecoponto);
-
-        eventoRepo.persist(evento);
-        return Response.status(Response.Status.CREATED).build();
-    }
-
-    // ✅ ATUALIZAR
-    @PUT
-    @Path("/{id}")
-    @Transactional
-    public Response atualizar(
-            @PathParam("id") Long id,
-            @FormParam("descricao") String descricao,
-            @FormParam("createdAt") String createdAtStr,
-            @FormParam("endereco") Long endereco,
-            @FormParam("obs") String obs,
-            @FormParam("dataEvento") String dataEventoStr,
-            @FormParam("horarioInicioFuncionamento") String horarioInicioStr,
-            @FormParam("horarioTerminoFuncionamento") String horarioTerminoStr,
-            @FormParam("beneficiosDisponiveis") Long beneficiosDisponiveis,
-            @FormParam("foto") String foto,
-            @FormParam("idEcoponto") Long idEcoponto
-    ) {
+    @GET
+    @Path("/{id}/inscritos")
+    public Response contarInscritos(@PathParam("id") Long id) {
         Evento evento = eventoRepo.findById(id);
         if (evento == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        evento.setDescricao(descricao);
-        evento.setCreatedAt(LocalDateTime.parse(createdAtStr));
-        evento.setEndereco(endereco);
-        evento.setObs(obs);
-        evento.setDataEvento(LocalDateTime.parse(dataEventoStr));
-        evento.setHorarioInicioFuncionamento(LocalTime.parse(horarioInicioStr));
-        evento.setHorarioTerminoFuncionamento(LocalTime.parse(horarioTerminoStr));
-        evento.setBeneficiosDisponiveis(beneficiosDisponiveis);
-        evento.setFoto(foto);
+        Long quantidadeInscritos = inscricaoRepo.countByEvento(id);
+        return Response.ok(quantidadeInscritos).build();
+    }
 
-        Ecoponto ecoponto = ecopontoRepo.findById(idEcoponto);
+    @POST
+    @Transactional
+    public Response criar(EventoDTO eventoDTO) {
+        Ecoponto ecoponto = ecopontoRepo.findById(eventoDTO.getEcopontoId());
         if (ecoponto == null) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity("Ecoponto não encontrado").build();
         }
+
+        Endereco endereco = enderecoRepo.findById(eventoDTO.getEnderecoId());
+        if (endereco == null) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("Endereço não encontrado").build();
+        }
+
+        Evento evento = new Evento();
+        evento.setDescricao(eventoDTO.getDescricao());
+        evento.setCreatedAt(LocalDateTime.now());
+        evento.setEndereco(endereco);
+        evento.setObs(eventoDTO.getObs());
+        evento.setDataEvento(eventoDTO.getDataEvento());
+        evento.setHorarioInicioFuncionamento(eventoDTO.getHorarioInicioFuncionamento());
+        evento.setHorarioTerminoFuncionamento(eventoDTO.getHorarioTerminoFuncionamento());
+        evento.setBeneficiosDisponiveis(eventoDTO.getBeneficiosDisponiveis());
+        evento.setFoto(eventoDTO.getFoto());
         evento.setEcoponto(ecoponto);
 
-        return Response.ok().build();
+        eventoRepo.persist(evento);
+        return Response.status(Response.Status.CREATED)
+                .entity(convertToDTO(evento))
+                .build();
     }
 
-    // ✅ DELETAR
+    @PUT
+    @Path("/{id}")
+    @Transactional
+    public Response atualizar(@PathParam("id") Long id, EventoDTO eventoDTO) {
+        Evento evento = eventoRepo.findById(id);
+        if (evento == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        Ecoponto ecoponto = ecopontoRepo.findById(eventoDTO.getEcopontoId());
+        if (ecoponto == null) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("Ecoponto não encontrado").build();
+        }
+
+        Endereco endereco = enderecoRepo.findById(eventoDTO.getEnderecoId());
+        if (endereco == null) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("Endereço não encontrado").build();
+        }
+
+        evento.setDescricao(eventoDTO.getDescricao());
+        evento.setEndereco(endereco);
+        evento.setObs(eventoDTO.getObs());
+        evento.setDataEvento(eventoDTO.getDataEvento());
+        evento.setHorarioInicioFuncionamento(eventoDTO.getHorarioInicioFuncionamento());
+        evento.setHorarioTerminoFuncionamento(eventoDTO.getHorarioTerminoFuncionamento());
+        evento.setBeneficiosDisponiveis(eventoDTO.getBeneficiosDisponiveis());
+        evento.setFoto(eventoDTO.getFoto());
+        evento.setEcoponto(ecoponto);
+
+        return Response.ok(convertToDTO(evento)).build();
+    }
+
     @DELETE
     @Path("/{id}")
     @Transactional
@@ -131,5 +142,21 @@ public class EventoController {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
         return Response.noContent().build();
+    }
+
+    private EventoDTO convertToDTO(Evento evento) {
+        EventoDTO dto = new EventoDTO();
+        dto.setId(evento.getId());
+        dto.setDescricao(evento.getDescricao());
+        dto.setCreatedAt(evento.getCreatedAt());
+        dto.setEnderecoId(evento.getEndereco().getId());
+        dto.setObs(evento.getObs());
+        dto.setDataEvento(evento.getDataEvento());
+        dto.setHorarioInicioFuncionamento(evento.getHorarioInicioFuncionamento());
+        dto.setHorarioTerminoFuncionamento(evento.getHorarioTerminoFuncionamento());
+        dto.setBeneficiosDisponiveis(evento.getBeneficiosDisponiveis());
+        dto.setFoto(evento.getFoto());
+        dto.setEcopontoId(evento.getEcoponto().getId());
+        return dto;
     }
 }

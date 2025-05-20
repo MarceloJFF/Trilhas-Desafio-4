@@ -1,18 +1,21 @@
 package org.acme.controllers;
+
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.acme.models.*;
+import org.acme.dto.EntregaMaterialDTO;
+import org.acme.entities.*;
 import org.acme.repositories.*;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Path("/entregas")
 @Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+@Consumes(MediaType.APPLICATION_JSON)
 public class EntregaMaterialController {
 
     @Inject
@@ -30,62 +33,116 @@ public class EntregaMaterialController {
     @Inject
     TipoLixoRepository tipoLixoRepository;
 
+    @Inject
+    TipoLixoAceitoEcopontoRepository tipoLixoAceitoEcopontoRepository;
+
     @GET
-    public List<EntregaMaterial> listarEntregas() {
-        return entregaMaterialRepository.listAll();
+    public Response listarEntregas() {
+        List<EntregaMaterial> entregas = entregaMaterialRepository.listAll();
+        List<EntregaMaterialDTO> entregasDTO = entregas.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+        return Response.ok(entregasDTO).build();
     }
 
     @POST
     @Path("/nova")
     @Transactional
-    public Response criarEntrega(
-            @FormParam("id_usuario") Long idUsuario,
-            @FormParam("id_ecoponto") Long idEcoponto,
-            @FormParam("data_entrega") Long dataEntrega,
-            @FormParam("qtd_pontos_gerados") Long pontosGerados,
-            @FormParam("id_empresa") Long idEmpresa,
-            @FormParam("valor_total_gerado") Long valorTotal,
-            @FormParam("tipos_lixo") List<Long> tiposLixoIds,
-            @FormParam("kgs") List<BigDecimal> kgs
-    ) {
-        if (tiposLixoIds.size() != kgs.size()) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("A quantidade de tipos de lixo e kg deve ser igual").build();
+    public Response criarEntrega(EntregaMaterialDTO dto) {
+        if (dto.getTiposLixoIds().size() != dto.getKgs().size()) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("A quantidade de tipos de lixo e kg deve ser igual")
+                    .build();
         }
 
-        Usuario usuario = usuarioRepository.findById(idUsuario);
-        Ecoponto ecoponto = ecopontoRepository.findById(idEcoponto);
+        Usuario usuario = usuarioRepository.findById(dto.getIdUsuario());
+        Ecoponto ecoponto = ecopontoRepository.findById(dto.getIdEcoponto());
         if (usuario == null || ecoponto == null) {
-            return Response.status(Response.Status.NOT_FOUND).entity("Usuário ou Ecoponto não encontrado").build();
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("Usuário ou Ecoponto não encontrado")
+                    .build();
         }
 
+        // Buscar as regras de pontuação do ecoponto
+        List<TipoLixoAceitoEcoponto> regrasPontuacao = tipoLixoAceitoEcopontoRepository
+                .list("ecoponto.id", ecoponto.getId());
+
+        if (regrasPontuacao.isEmpty()) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("Ecoponto não possui regras de pontuação configuradas")
+                    .build();
+        }
+
+        // Criar a entrega
         EntregaMaterial entrega = new EntregaMaterial();
         entrega.setUsuario(usuario);
         entrega.setEcoponto(ecoponto);
-        entrega.setDataEntrega(dataEntrega);
-        entrega.setQtdPontosGerados(pontosGerados);
-        entrega.setIdEmpresa(idEmpresa);
-        entrega.setValorTotalGerado(valorTotal);
+        entrega.setDataEntrega(dto.getDataEntrega());
+        entrega.setIdEmpresa(dto.getIdEmpresa());
 
-        entregaMaterialRepository.persist(entrega);
+        // Calcular pontos e valor total
+        long pontosTotais = 0;
+        BigDecimal valorTotal = BigDecimal.ZERO;
 
-        for (int i = 0; i < tiposLixoIds.size(); i++) {
-            TipoLixo tipoLixo = tipoLixoRepository.findById(tiposLixoIds.get(i));
-            if (tipoLixo == null) continue;
+        for (int i = 0; i < dto.getTiposLixoIds().size(); i++) {
+            Long tipoLixoId = dto.getTiposLixoIds().get(i);
+            BigDecimal quantidade = dto.getKgs().get(i);
 
-            EntregaTipoLixo entregaTipo = new EntregaTipoLixo();
-            entregaTipo.setEntregaMaterial(entrega);
-            entregaTipo.setTipoLixo(tipoLixo);
-            entregaTipo.setKg(kgs.get(i));
-            entregaTipoLixoRepository.persist(entregaTipo);
+            // Encontrar a regra de pontuação para este tipo de lixo
+            TipoLixoAceitoEcoponto regra = regrasPontuacao.stream()
+                    .filter(r -> r.getTipoLixo().getId().equals(tipoLixoId))
+                    .findFirst()
+                    .orElse(null);
+
+            if (regra == null) {
+                return Response.status(Response.Status.BAD_REQUEST)
+                        .entity("Tipo de lixo " + tipoLixoId + " não é aceito neste ecoponto")
+                        .build();
+            }
+
+            // Calcular pontos para este tipo de lixo
+            long pontos = (long) (quantidade.doubleValue() * regra.getPontosPorKg());
+            pontosTotais += pontos;
+
+            // Calcular valor (se houver valor por kg)
+            if (regra.getValorPorKg() != null) {
+                BigDecimal valor = quantidade.multiply(regra.getValorPorKg());
+                valorTotal = valorTotal.add(valor);
+            }
+
+            // Criar registro de entrega por tipo de lixo
+            TipoLixo tipoLixo = tipoLixoRepository.findById(tipoLixoId);
+            if (tipoLixo != null) {
+                EntregaTipoLixo entregaTipo = new EntregaTipoLixo();
+                entregaTipo.setEntregaMaterial(entrega);
+                entregaTipo.setTipoLixo(tipoLixo);
+                entregaTipo.setKg(quantidade);
+                entregaTipoLixoRepository.persist(entregaTipo);
+            }
         }
 
-        return Response.status(Response.Status.CREATED).entity(entrega).build();
+        // Atualizar pontos do usuário
+        usuario.setSaldoPontos(usuario.getSaldoPontos() + pontosTotais);
+        usuarioRepository.persist(usuario);
+
+        // Finalizar a entrega
+        entrega.setQtdPontosGerados(pontosTotais);
+        entrega.setValorTotalGerado(valorTotal.longValue());
+        entregaMaterialRepository.persist(entrega);
+
+        return Response.status(Response.Status.CREATED)
+                .entity(convertToDTO(entrega))
+                .build();
     }
 
     @GET
     @Path("/{id}")
-    public EntregaMaterial obter(@PathParam("id") Long id) {
-        return entregaMaterialRepository.findById(id);
+    public Response obter(@PathParam("id") Long id) {
+        EntregaMaterial entrega = entregaMaterialRepository.findById(id);
+        if (entrega == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.ok(convertToDTO(entrega)).build();
     }
 
     @GET
@@ -93,21 +150,48 @@ public class EntregaMaterialController {
     public Response listarEntregasPorEcoponto(@PathParam("idEcoponto") Long idEcoponto) {
         List<EntregaMaterial> entregas = entregaMaterialRepository.list("ecoponto.id", idEcoponto);
         if (entregas.isEmpty()) {
-            return Response.status(Response.Status.NOT_FOUND).entity("Nenhuma entrega encontrada para o ecoponto informado").build();
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("Nenhuma entrega encontrada para o ecoponto informado")
+                    .build();
         }
-        return Response.ok(entregas).build();
+        List<EntregaMaterialDTO> entregasDTO = entregas.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+        return Response.ok(entregasDTO).build();
     }
-
 
     @DELETE
     @Path("/{id}")
     @Transactional
-    public void excluir(@PathParam("id") Long id) {
+    public Response excluir(@PathParam("id") Long id) {
         EntregaMaterial entrega = entregaMaterialRepository.findById(id);
-        if (entrega != null) {
-            entregaTipoLixoRepository.delete("entregaMaterial.id", id);
-            entregaMaterialRepository.delete(entrega);
+        if (entrega == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
+        entregaTipoLixoRepository.delete("entregaMaterial.id", id);
+        entregaMaterialRepository.delete(entrega);
+        return Response.noContent().build();
+    }
+
+    private EntregaMaterialDTO convertToDTO(EntregaMaterial entrega) {
+        EntregaMaterialDTO dto = new EntregaMaterialDTO();
+        dto.setId(entrega.getId());
+        dto.setIdUsuario(entrega.getUsuario().getId());
+        dto.setIdEcoponto(entrega.getEcoponto().getId());
+        dto.setDataEntrega(entrega.getDataEntrega());
+        dto.setQtdPontosGerados(entrega.getQtdPontosGerados());
+        dto.setIdEmpresa(entrega.getIdEmpresa());
+        dto.setValorTotalGerado(entrega.getValorTotalGerado());
+        
+        List<EntregaTipoLixo> tiposLixo = entregaTipoLixoRepository.list("entregaMaterial.id", entrega.getId());
+        dto.setTiposLixoIds(tiposLixo.stream()
+                .map(etl -> etl.getTipoLixo().getId())
+                .collect(Collectors.toList()));
+        dto.setKgs(tiposLixo.stream()
+                .map(EntregaTipoLixo::getKg)
+                .collect(Collectors.toList()));
+        
+        return dto;
     }
 }
 

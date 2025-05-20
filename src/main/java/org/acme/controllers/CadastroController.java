@@ -1,158 +1,135 @@
 package org.acme.controllers;
-import io.quarkus.qute.Template;
-import io.quarkus.qute.TemplateInstance;
+
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.UriBuilder;
-import org.acme.models.Acesso;
-import org.acme.models.Ecoponto;
-import org.acme.models.Endereco;
-import org.acme.models.Usuario;
-import org.acme.repositories.AcessoRepository;
-import org.acme.repositories.EcopontoRepository;
-import org.acme.repositories.EnderecoRepository;
-import org.acme.repositories.UsuarioRepository;
-import org.acme.util.PasswordUtil;
-
-import java.math.BigDecimal;
-import java.net.URI;
-import java.util.Optional;
+import org.acme.dto.CadastroEcopontoDTO;
+import org.acme.dto.CadastroUsuarioDTO;
+import org.acme.dto.CadastroEmpresaDTO;
+import org.acme.entities.*;
+import org.acme.repositories.*;
+import org.acme.utils.PasswordUtil;
 
 @Path("/cadastro")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class CadastroController {
-    @Inject
-    Template Cadastro_Ecoponto;
 
-    @Inject
-    Template login;
-
-    @Inject
-    EcopontoRepository ecopontoRepository;
-    @Inject
-    AcessoRepository acessoRepository;
-    @Inject
-    PasswordUtil passwordUtil;
-    @Inject
-    EnderecoRepository enderecoRepository;
     @Inject
     UsuarioRepository usuarioRepository;
 
+    @Inject
+    EmpresaRepository empresaRepository;
+
+    @Inject
+    EcopontoRepository ecopontoRepository;
+
+    @Inject
+    EnderecoRepository enderecoRepository;
+
+    @Inject
+    LoginRepository loginRepository;
+
     @POST
-    @Path("Ecoponto")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    @Produces(MediaType.TEXT_HTML)
+    @Path("/usuario")
     @Transactional
-    public Object cadastrarEcoponto(@FormParam("descricao") String descricao,
-                                    @FormParam("latitude") BigDecimal latitude,
-                                    @FormParam("longitude") BigDecimal longitude,
-                                    @FormParam("cep") String cep,
-                                    @FormParam("logradouro") String logradouro,
-                                    @FormParam("bairro") String bairro,
-                                    @FormParam("complemento") String complemento,
-                                    @FormParam("login") String login,
-                                    @FormParam("password") String password) {
-        Optional<Acesso> existente = acessoRepository.find("login", login).firstResultOptional();
-
-        if (existente.isPresent()) {
-            // Retorna à página de cadastro com mensagem de erro
-            return Cadastro_Ecoponto.data("erro", "Login já está em uso. Escolha outro.");
+    public Response cadastrarUsuario(CadastroUsuarioDTO dto) {
+        if (loginRepository.findByLogin(dto.getLogin()) != null) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("Login já existe")
+                    .build();
         }
 
-        try {
-            Acesso acesso = new Acesso();
-            acesso.setLogin(login);
-            acesso.setPassword(PasswordUtil.hash(password));
-            acessoRepository.persist(acesso);
+        Endereco endereco = new Endereco();
+        endereco.setCep(dto.getCep());
+        endereco.setLogradouro(dto.getLogradouro());
+        endereco.setBairro(dto.getBairro());
+        endereco.setComplemento(dto.getComplemento());
+        enderecoRepository.persist(endereco);
 
-            Endereco endereco = new Endereco();
-            endereco.setBairro(bairro);
-            endereco.setComplemento(complemento);
-            endereco.setLogradouro(logradouro);
-            enderecoRepository.persist(endereco);
+        Login login = new Login();
+        login.setLogin(dto.getLogin());
+        login.setPassword(PasswordUtil.hashPassword(dto.getPassword()));
+        login.setTipo("usuario");
+        loginRepository.persist(login);
 
-            Ecoponto ecoponto = new Ecoponto();
-            ecoponto.setDescricao(descricao);
-            ecoponto.setCep(cep);
-            ecoponto.setAcesso(acesso);
-            ecoponto.setLatitude(latitude);
-            ecoponto.setLongitude(longitude);
-            ecoponto.setEndereco(endereco);
-            ecoponto.setAceitaLixoEletronico(true);
-            ecopontoRepository.persist(ecoponto);
+        Usuario usuario = new Usuario();
+        usuario.setPrimeiroNome(dto.getPrimeiroNome());
+        usuario.setUltimoNome(dto.getUltimoNome());
+        usuario.setCpf(dto.getCpf());
+        usuario.setEndereco(endereco);
+        usuario.setLogin(login);
+        usuarioRepository.persist(usuario);
 
-            // Redireciona para o login com mensagem de sucesso via query string
-            URI loginUri = UriBuilder.fromPath("/login").queryParam("sucesso", "true").build();
-            return Response.seeOther(loginUri).build();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return Cadastro_Ecoponto.data("erro", "Erro ao cadastrar Ecoponto. Tente novamente.");
-        }
+        return Response.ok(usuario).build();
     }
-
 
     @POST
-    @Path("Usuario")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    @Produces(MediaType.TEXT_HTML)
-    public Object cadastrarUsuario(@FormParam("login") String login,
-                                   @FormParam("password") String password,
-                                   @FormParam("primeiro-nome") String primeiroNome,
-                                   @FormParam("ultimo-nome") String ultimoNome,
-                                   @FormParam("cpf") String cpf,
-                                   @FormParam("cep") String cep,
-                                   @FormParam("logradouro") String logradouro,
-                                   @FormParam("bairro") String bairro,
-                                   @FormParam("complemento") String complemento) {
-        Optional<Acesso> existente = acessoRepository.find("login", login).firstResultOptional();
-
-        if (existente.isPresent()) {
-            // Retorna à página de cadastro com mensagem de erro
-            return Cadastro_Ecoponto.data("erro", "Login já está em uso. Escolha outro.");
+    @Path("/empresa")
+    @Transactional
+    public Response cadastrarEmpresa(CadastroEmpresaDTO dto) {
+        if (loginRepository.findByLogin(dto.getLogin()) != null) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("Login já existe")
+                    .build();
         }
 
-        try {
-            Acesso acesso = new Acesso();
-            acesso.setLogin(login);
-            acesso.setPassword(PasswordUtil.hash(password));
-            acessoRepository.persist(acesso);
+        Endereco endereco = new Endereco();
+        endereco.setCep(dto.getCep());
+        endereco.setLogradouro(dto.getLogradouro());
+        endereco.setBairro(dto.getBairro());
+        endereco.setComplemento(dto.getComplemento());
+        enderecoRepository.persist(endereco);
 
-            Endereco endereco = new Endereco();
-            endereco.setBairro(bairro);
-            endereco.setComplemento(complemento);
-            endereco.setLogradouro(logradouro);
-            enderecoRepository.persist(endereco);
+        Login login = new Login();
+        login.setLogin(dto.getLogin());
+        login.setPassword(PasswordUtil.hashPassword(dto.getPassword()));
+        login.setTipo("empresa");
+        loginRepository.persist(login);
 
-            Usuario usuario = new Usuario();
-            usuario.setCpf(cpf);
-            usuario.setPrimerioNome(primeiroNome);
-            usuario.setUltimoNome(ultimoNome);
-            usuario.setEndereco(endereco);
-            usuario.setAcesso(acesso);
-            usuarioRepository.persist(usuario);
+        Empresa empresa = new Empresa();
+        empresa.setNome(dto.getNome());
+        empresa.setCnpj(dto.getCnpj());
+        empresa.setEndereco(endereco);
+        empresa.setLogin(login);
+        empresaRepository.persist(empresa);
 
-            // Redireciona para o login com mensagem de sucesso
-            URI loginUri = UriBuilder.fromPath("/login/empresa").queryParam("sucesso", "true").build();
-            return Response.seeOther(loginUri).build();
-        } catch (Exception e) {
-            return Cadastro_Ecoponto.data("erro", "Erro ao cadastrar usuário. Tente novamente.");
-        }
+        return Response.ok(empresa).build();
     }
 
-    @GET
-    @Path("/cadastro/ecoponto")
-    @Produces(MediaType.TEXT_HTML)
-    public TemplateInstance cadastroEcoponto(@QueryParam("erro") String erro) {
-        String mensagemErro = null;
-        if ("login".equals(erro)) {
-            mensagemErro = "Login já está em uso.";
-        } else if ("geral".equals(erro)) {
-            mensagemErro = "Erro ao cadastrar. Tente novamente.";
+    @POST
+    @Path("/ecoponto")
+    @Transactional
+    public Response cadastrarEcoponto(CadastroEcopontoDTO dto) {
+        if (loginRepository.findByLogin(dto.getLogin()) != null) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("Login já existe")
+                    .build();
         }
-        return Cadastro_Ecoponto.data("erro", mensagemErro).data("sucesso",false);
+
+        Endereco endereco = new Endereco();
+        endereco.setCep(dto.getCep());
+        endereco.setLogradouro(dto.getLogradouro());
+        endereco.setBairro(dto.getBairro());
+        endereco.setComplemento(dto.getComplemento());
+        enderecoRepository.persist(endereco);
+
+        Login login = new Login();
+        login.setLogin(dto.getLogin());
+        login.setPassword(PasswordUtil.hashPassword(dto.getPassword()));
+        login.setTipo("ecoponto");
+        loginRepository.persist(login);
+
+        Ecoponto ecoponto = new Ecoponto();
+        ecoponto.setDescricao(dto.getDescricao());
+        ecoponto.setLatitude(dto.getLatitude());
+        ecoponto.setLongitude(dto.getLongitude());
+        ecoponto.setEndereco(endereco);
+        ecoponto.setLogin(login);
+        ecopontoRepository.persist(ecoponto);
+
+        return Response.ok(ecoponto).build();
     }
-
-
 }

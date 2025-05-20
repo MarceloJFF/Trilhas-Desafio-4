@@ -15,7 +15,7 @@ public class Acesso {
     private String login;
     @Column(nullable = false)
     private String password;
-    @OneToOne(mappedBy = "acesso")
+    @OneToOne(mappedBy = "acesso"g)
     private Usuario usuario;
 
     @OneToOne(mappedBy = "acesso")

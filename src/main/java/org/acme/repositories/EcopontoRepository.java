@@ -4,4 +4,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import org.acme.models.Ecoponto;
 @ApplicationScoped
 public class EcopontoRepository implements PanacheRepository<Ecoponto> {
+    public boolean existsById(Long id) {
+        return findById(id) != null;
+    }
 }
