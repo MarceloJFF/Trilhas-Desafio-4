@@ -1,0 +1,141 @@
+:root {
+  --green-dark: #2e7d32;
+  --green-darker: #145214;
+  --green-medium: #3a6a3a;
+  --green-light: #548467;
+  --green-lighter: #d7f3e3;
+  --white: #ffffff;
+}
+
+body {
+  background: linear-gradient(135deg, var(--green-lighter), var(--green-light));
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding-bottom: 3rem;
+  color: var(--white); /* letras fora dos containers ficam brancas */
+}
+
+.navbar.bg-success {
+  background-color: var(--green-dark) !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  color: var(--white) !important;
+}
+
+h5, h1.h3, h2, h4 {
+  font-weight: 700;
+  color: var(--white); /* títulos fora dos cards em branco */
+  text-shadow: 0 1px 1px var(--green-darker);
+}
+
+/* Estilo dos containers/card */
+.card {
+  background-color: var(--green-medium);
+  border-radius: 1rem;
+  box-shadow: 0 0 15px rgba(0, 100, 0, 0.25);
+  color: var(--white); /* letras dentro dos containers em branco */
+}
+
+/* Headers dentro dos cards */
+.card-header.bg-primary {
+  background-color: var(--green-darker) !important;
+  color: var(--white);
+  font-weight: 700;
+}
+
+.card-header.bg-secondary {
+  background-color: var(--green-light) !important;
+  color: var(--green-darker);
+  font-weight: 700;
+}
+
+.card-header.bg-warning {
+  background-color: var(--green-dark) !important;
+  color: var(--white);
+  font-weight: 700;
+}
+
+/* Botões */
+.btn-primary {
+  background-color: var(--green-dark);
+  border-color: var(--green-dark);
+  font-weight: 600;
+  color: var(--white);
+}
+.btn-primary:hover {
+  background-color: var(--green-darker);
+  border-color: var(--green-darker);
+  color: var(--white);
+}
+
+.btn-success {
+  background-color: var(--green-medium);
+  border-color: var(--green-medium);
+  font-weight: 600;
+  color: var(--white);
+}
+.btn-success:hover {
+  background-color: var(--green-dark);
+  border-color: var(--green-dark);
+  color: var(--white);
+}
+
+.btn-danger {
+  background-color: var(--green-dark);
+  border-color: var(--green-dark);
+  font-weight: 600;
+  color: var(--white);
+}
+.btn-danger:hover {
+  background-color: var(--green-darker);
+  border-color: var(--green-darker);
+  color: var(--white);
+}
+
+.btn-warning {
+  background-color: var(--green-medium);
+  border-color: var(--green-medium);
+  font-weight: 600;
+  color: var(--white);
+}
+.btn-warning:hover {
+  background-color: var(--green-dark);
+  border-color: var(--green-dark);
+  color: var(--white);
+}
+
+/* Inputs: fundo branco, texto verde escuro para legibilidade */
+input.form-control {
+  border-radius: 0.5rem;
+  color: var(--green-darker);
+  background-color: var(--white);
+  border: 1px solid var(--green-light);
+}
+input.form-control::placeholder {
+  color: var(--green-medium);
+}
+
+/* Labels dos checkboxes */
+.form-check-label {
+  font-weight: 600;
+  color: var(--white);
+}
+
+.container.mt-4 {
+  max-width: 1200px;
+}
+
+.d-flex.gap-2 > button {
+  min-width: 80px;
+}
+
+@media (max-width: 991.98px) {
+  .container.mt-4 {
+    max-width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pontos de Coleta Próximos - EcoPonto</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="/assets/styles/ecoponto.css" rel="stylesheet" />
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+    <div class="container">
+      <a class="navbar-brand" href="#"><i class="bi bi-recycle me-2"></i>EcoPonto</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+        aria-controls="navMenu" aria-expanded="false" aria-label="Alternar navegação">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="#">Início</a></li>
+          <li class="nav-item"><a class="nav-link" href="beneficios.html">Benefícios</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#minhasSolicitacoesModal">Minhas Solicitações</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="eventos.html">Eventos</a></li>
+          <li class="nav-item"><a class="nav-link" href="perfil.html">Perfil</a></li>
+          <li class="nav-item"><a class="nav-link" href="logout.html">Sair</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1 class="h3">Pontos de Coleta Próximos</h1>
+      <div>
+        <span class="badge bg-primary fs-5">Saldo de Pontos: <strong>120</strong></span>
+      </div>
+    </div>
+
+    <div class="list-group">
+      <!-- Item Ecoponto -->
+      <div class="list-group-item">
+        <div class="d-flex w-100 justify-content-between align-items-center">
+          <div>
+            <h5 class="mb-1">Ecoponto Central</h5>
+            <p class="mb-1">Recebe plástico, vidro e metal</p>
+            <small class="text-success"><i class="bi bi-check2-circle me-1"></i>Tipo: Ecoponto</small>
+          </div>
+          <small><i class="bi bi-geo-alt-fill me-1"></i>2,5 km</small>
+        </div>
+        <button class="btn btn-sm btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#solicitarEntregaModal" data-ecoponto="Ecoponto Central">
+          <i class="bi bi-box-arrow-in-up-right me-1"></i>Solicitar entrega de resíduo
+        </button>
+      </div>
+
+      <!-- Item Empresa -->
+      <div class="list-group-item">
+        <div class="d-flex w-100 justify-content-between align-items-center">
+          <div>
+            <h5 class="mb-1">ReciclaMais Ltda</h5>
+            <p class="mb-1">Compra papel e alumínio</p>
+            <small class="text-info"><i class="bi bi-building me-1"></i>Tipo: Empresa</small>
+          </div>
+          <small><i class="bi bi-geo-alt-fill me-1"></i>3,7 km</small>
+        </div>
+        <button class="btn btn-sm btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#solicitarEntregaModal" data-ecoponto="ReciclaMais Ltda">
+          <i class="bi bi-box-arrow-in-up-right me-1"></i>Solicitar entrega de resíduo
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal Solicitar Entrega -->
+  <div class="modal fade" id="solicitarEntregaModal" tabindex="-1" aria-labelledby="solicitarEntregaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <form id="formSolicitarEntrega" action="/solicitarEntrega" method="POST" class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="solicitarEntregaModalLabel">Solicitar Entrega de Resíduo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" name="ecoponto_nome" id="ecopontoNomeInput" />
+
+          <div class="mb-3">
+            <label for="tipoMaterial" class="form-label">Tipo de Material</label>
+            <select class="form-select" id="tipoMaterial" name="tipoMaterial" required>
+              <option value="" disabled selected>Selecione o tipo de material</option>
+              <option value="1">Plástico</option>
+              <option value="2">Vidro</option>
+              <option value="3">Papel</option>
+              <option value="4">Metal</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="quantidadeKg" class="form-label">Quantidade (kg)</label>
+            <input type="number" step="0.01" min="0.01" class="form-control" id="quantidadeKg" name="quantidadeKg" required />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success"><i class="bi bi-send-fill me-1"></i>Enviar Solicitação</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-circle me-1"></i>Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Minhas Solicitações -->
+  <div class="modal fade" id="minhasSolicitacoesModal" tabindex="-1" aria-labelledby="minhasSolicitacoesModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-success text-white">
+          <h5 class="modal-title" id="minhasSolicitacoesModalLabel"><i class="bi bi-list-check me-2"></i>Minhas Solicitações</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <strong>Ecoponto Central</strong> - Plástico - 5 kg - Status: <span class="badge bg-warning text-dark">Pendente</span>
+            </li>
+            <li class="list-group-item">
+              <strong>ReciclaMais Ltda</strong> - Vidro - 3 kg - Status: <span class="badge bg-success">Aceito</span>
+            </li>
+            <!-- Itens dinâmicos -->
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-circle me-1"></i>Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    var solicitarEntregaModal = document.getElementById('solicitarEntregaModal');
+    solicitarEntregaModal.addEventListener('show.bs.modal', function (event) {
+      var button = event.relatedTarget;
+      var ecopontoNome = button.getAttribute('data-ecoponto');
+      var inputNome = solicitarEntregaModal.querySelector('#ecopontoNomeInput');
+      inputNome.value = ecopontoNome;
+      solicitarEntregaModal.querySelector('.modal-title').textContent = 'Solicitar Entrega de Resíduo - ' + ecopontoNome;
+    });
+  </script>
+</body>
+</html>

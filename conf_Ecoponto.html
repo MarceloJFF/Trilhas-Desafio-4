@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Configurar Ecoponto - Painel Ecoponto</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/styles/ecoponto.css" rel="stylesheet" />
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+    <div class="container">
+      <a class="navbar-brand" href="#">EcoPonto</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="solicitacoes.html">Solicitações</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="configurar.html">Configurar Ecoponto</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="/logout">Sair</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mt-4">
+    <h2 class="mb-4 text-white">Configurar Tipos de Resíduos e Preços</h2>
+
+    <form action="/ecoponto/atualizar" method="POST">
+      <table class="table table-striped table-hover table-bordered align-middle bg-white rounded">
+        <thead class="table-success">
+          <tr>
+            <th scope="col">Tipo de Resíduo</th>
+            <th scope="col">Aceito</th>
+            <th scope="col">Pontos por Kg</th>
+            <th scope="col">Preço por Kg (R$)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Plástico</td>
+            <td><input type="checkbox" name="aceito_plastico" checked /></td>
+            <td><input type="number" name="pontos_plastico" value="10" min="0" class="form-control form-control-sm" required /></td>
+            <td><input type="number" name="preco_plastico" value="2.50" min="0" step="0.01" class="form-control form-control-sm" required /></td>
+          </tr>
+          <tr>
+            <td>Vidro</td>
+            <td><input type="checkbox" name="aceito_vidro" /></td>
+            <td><input type="number" name="pontos_vidro" value="8" min="0" class="form-control form-control-sm" required /></td>
+            <td><input type="number" name="preco_vidro" value="1.80" min="0" step="0.01" class="form-control form-control-sm" required /></td>
+          </tr>
+          <tr>
+            <td>Papel</td>
+            <td><input type="checkbox" name="aceito_papel" checked /></td>
+            <td><input type="number" name="pontos_papel" value="5" min="0" class="form-control form-control-sm" required /></td>
+            <td><input type="number" name="preco_papel" value="1.20" min="0" step="0.01" class="form-control form-control-sm" required /></td>
+          </tr>
+          <tr>
+            <td>Metal</td>
+            <td><input type="checkbox" name="aceito_metal" /></td>
+            <td><input type="number" name="pontos_metal" value="12" min="0" class="form-control form-control-sm" required /></td>
+            <td><input type="number" name="preco_metal" value="3.00" min="0" step="0.01" class="form-control form-control-sm" required /></td>
+          </tr>
+        </tbody>
+      </table>
+      <button type="submit" class="btn btn-success w-100">Salvar Alterações</button>
+    </form>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recicle - Sistema de Ecopontos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-recycle"></i>
+                <span>RECICLE</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="./ecopontoProximo1.html" id="nav-ecopontos">Ecopontos Proximos </a></li>
+                    <li><a href="./InscreverEmAcao1.html" id="nav-acoes">Ações Voluntárias</a></li>
+                    <li><a href="./CadastrarEmpresa.html" id="nav-empresas">Ecoponto Empresa</a></li>
+                    <li><a href="./recompensaVerde.html" id="nav-recompensas">Cadastrar Ecopontos</a></li>
+                    <li><a href="./ComoReciclar.html" id="nav-como-reciclar">Como Reciclar</a></li>
+                    <li><a href="./ClienteLogin.html" class="login-btn" id="nav-login">Entre ou Cadastre-se</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>RECOMPENSAS VERDE</h1>
+            <p>Recicle é uma plataforma digital que incentiva o descarte correto de resíduo e a adoção de práticas sustentáveis</p>
+            <div class="search-container">
+                <input type="text" class="search-input" id="search-input" placeholder="Digite seu CEP ou endereço">
+                <button class="search-btn" id="search-btn"><i class="fas fa-search"></i> Buscar</button>
+            </div>
+        </section>
+
+        <h2 class="section-title">Nossos Pilares Principais</h2>
+
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <h3>1 - Localização de Ecopontos</h3>
+                <p>Usuários podem buscar, por CEP ou endereço, os pontos de coleta seletiva mais próximos para destinar vidro, plástico, papel, metal e orgânicos.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-hands-helping"></i>
+                </div>
+                <h3>2 - Ações Voluntárias</h3>
+                <p>O site reúne e divulga mutirões de limpeza, plantios e eventos educativos, permitindo que pessoas se inscrevam e contribuam diretamente em iniciativas locais.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3>3 - Parcerias com Empresas</h3>
+                <p>Organizações podem cadastrar seus pontos de coleta, campanhas de sustentabilidade e benefícios exclusivos para a comunidade.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-award"></i>
+                </div>
+                <h3>4 - Recompensa Verde</h3>
+                <p>A cada descarte realizado de forma correta, o usuário acumula pontos "Verdes" que podem ser trocados por descontos, benefícios ou doações a projetos ambientais.</p>
+            </div>
+        </section>
+
+        <section class="rewards-section">
+            <h2 class="section-title">Programa de Recompensas</h2>
+            <div class="rewards-grid" id="rewards-grid">
+                <!-- Conteúdo dinâmico será inserido aqui via JavaScript -->
+            </div>
+        </section>
+
+        <h2 class="section-title">Como Reciclar o seu Lixo</h2>
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-trash-alt"></i>
+                </div>
+                <h3>Separação</h3>
+                <p>Separe os materiais por tipo: papel, plástico, vidro, metal e orgânicos.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-broom"></i>
+                </div>
+                <h3>Limpeza</h3>
+                <p>Lave os recipientes para evitar odores e facilitar a reciclagem.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-box-open"></i>
+                </div>
+                <h3>Armazenamento</h3>
+                <p>Armazene os materiais separadamente em recipientes adequados.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <h3>Descarte</h3>
+                <p>Leve até o ecoponto mais próximo ou agende a coleta seletiva.</p>
+            </div>
+        </section>
+
+        <!-- Modal para detalhes do ecoponto -->
+        <div class="modal" id="ecoponto-modal">
+            <div class="modal-content">
+                <span class="close-btn" id="close-modal">&times;</span>
+                <h2 id="modal-title">Detalhes do Ecoponto</h2>
+                <div class="modal-body" id="modal-body">
+                    <!-- Conteúdo dinâmico será inserido aqui via JavaScript -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Sobre Nós</h3>
+                <ul>
+                    <li><a href="#">Missão</a></li>
+                    <li><a href="#">Equipe</a></li>
+                    <li><a href="#">Parceiros</a></li>
+                    <li><a href="#">Impacto Ambiental</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Recursos</h3>
+                <ul>
+                    <li><a href="#">Ecopontos</a></li>
+                    <li><a href="#">Eventos</a></li>
+                    <li><a href="#">Guia de Reciclagem</a></li>
+                    <li><a href="#">Recompensas</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Ajuda</h3>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Contato</a></li>
+                    <li><a href="#">Termos de Uso</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Conecte-se</h3>
+                <p>Nos siga nas redes sociais</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-figma"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Recicle - Todos os direitos reservados</p>
+        </div>
+    </footer>
+
+    <script src="script.js">
+        
+    </script>
+</body>
+</html>
