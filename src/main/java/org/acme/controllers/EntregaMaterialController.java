@@ -6,7 +6,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.acme.dto.EntregaMaterialDTO;
-import org.acme.entities.*;
+import org.acme.models.*;
 import org.acme.repositories.*;
 
 import java.math.BigDecimal;
@@ -101,14 +101,10 @@ public class EntregaMaterialController {
             }
 
             // Calcular pontos para este tipo de lixo
-            long pontos = (long) (quantidade.doubleValue() * regra.getPontosPorKg());
+            long pontos = (long) (quantidade.doubleValue() * regra.getPontosKg());
             pontosTotais += pontos;
 
-            // Calcular valor (se houver valor por kg)
-            if (regra.getValorPorKg() != null) {
-                BigDecimal valor = quantidade.multiply(regra.getValorPorKg());
-                valorTotal = valorTotal.add(valor);
-            }
+
 
             // Criar registro de entrega por tipo de lixo
             TipoLixo tipoLixo = tipoLixoRepository.findById(tipoLixoId);

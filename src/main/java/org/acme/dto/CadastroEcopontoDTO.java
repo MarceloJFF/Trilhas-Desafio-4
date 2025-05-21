@@ -6,6 +6,9 @@ import java.math.BigDecimal;
 @Data
 public class CadastroEcopontoDTO {
     private String descricao;
+    private String nome;
+    private String cnpj;
+    private String telefone;
     private BigDecimal latitude;
     private BigDecimal longitude;
     private String cep;

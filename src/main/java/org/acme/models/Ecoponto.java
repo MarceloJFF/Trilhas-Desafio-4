@@ -38,7 +38,9 @@ public class Ecoponto {
     @OneToOne
     @JoinColumn(name = "id_endereco", nullable = false)
     public Endereco endereco;
-
+    private String nome;
+    private String Telefone;
+    private String cnpj;
     @Override
     public String toString() {
         return "Ecoponto{" +

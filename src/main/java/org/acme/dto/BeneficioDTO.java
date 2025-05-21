@@ -9,6 +9,8 @@ public class BeneficioDTO {
     private String descricao;
     private Long qtdPontosNecessarios;
     private String empresa;
+
+    private boolean expirado;
     private LocalDateTime dataExpiracao;
     private Long ecopontoId;
 } 

@@ -15,9 +15,9 @@ public class Acesso {
     private String login;
     @Column(nullable = false)
     private String password;
-    @OneToOne(mappedBy = "acesso"g)
+    @OneToOne(mappedBy = "acesso")
     private Usuario usuario;
-
+    private String tipo;
     @OneToOne(mappedBy = "acesso")
     @JsonIgnore
     private Ecoponto ecoponto;

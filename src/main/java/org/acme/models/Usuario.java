@@ -11,7 +11,7 @@ import lombok.Data;
 public class Usuario {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String primerioNome;
+    private String primeiroNome;
     private String ultimoNome;
     private Boolean isAdmin;
     private String cpf;
@@ -19,7 +19,6 @@ public class Usuario {
 
     @OneToOne @JoinColumn(name = "id_endereco")
     private Endereco endereco;
-
     @OneToOne @JoinColumn(name = "id_acesso")
     private Acesso acesso;
 }

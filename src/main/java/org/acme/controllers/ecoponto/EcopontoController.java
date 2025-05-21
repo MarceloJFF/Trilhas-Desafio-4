@@ -12,12 +12,11 @@ import org.acme.models.Endereco;
 import org.acme.repositories.AcessoRepository;
 import org.acme.repositories.EcopontoRepository;
 import org.acme.repositories.EnderecoRepository;
-import org.acme.util.PasswordUtil;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
-
+import org.acme.util.PasswordUtil;
 @Path("/ecoponto")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -90,7 +89,7 @@ public class EcopontoController {
         // Criar acesso
         Acesso acesso = new Acesso();
         acesso.setLogin(ecopontoDTO.getLogin());
-        acesso.setPassword(PasswordUtil.hash(ecopontoDTO.getPassword()));
+        acesso.setPassword(PasswordUtil.hashPassword(ecopontoDTO.getPassword()));
         acessoRepository.persist(acesso);
 
         // Criar endereço
@@ -167,7 +166,7 @@ public class EcopontoController {
             }
 
             if (ecopontoDTO.getPassword() != null && !ecopontoDTO.getPassword().trim().isEmpty()) {
-                acesso.setPassword(PasswordUtil.hash(ecopontoDTO.getPassword()));
+                acesso.setPassword(PasswordUtil.hashPassword(ecopontoDTO.getPassword()));
                 acessoAtualizado = true;
             }
 

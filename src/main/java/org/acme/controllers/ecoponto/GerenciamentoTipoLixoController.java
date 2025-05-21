@@ -1,7 +1,6 @@
 package org.acme.controllers.ecoponto;
 
-import io.quarkus.qute.Template;
-import io.quarkus.qute.TemplateInstance;
+
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
