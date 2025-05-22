@@ -1,0 +1,1 @@
+ALTER TABLE tb_tipo_lixo_aceito_ecoponto ADD COLUMN aceito BOOLEAN DEFAULT true; 
