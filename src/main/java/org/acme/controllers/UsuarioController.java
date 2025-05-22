@@ -1,4 +1,4 @@
-package org.acme.controllers.Auth.ecoponto;
+package org.acme.controllers;
 
 import org.acme.models.Acesso;
 import org.acme.models.Usuario;

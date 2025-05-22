@@ -6,9 +6,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 import org.acme.dto.AcessoDTO;
 import org.acme.models.Acesso;
-import org.acme.models.Usuario;
 import org.acme.repositories.AcessoRepository;
-import org.acme.repositories.UsuarioRepository;
 import org.acme.util.PasswordUtil;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
