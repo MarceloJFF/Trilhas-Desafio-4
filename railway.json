@@ -5,6 +5,6 @@
     "dockerfilePath": "src/main/docker/Dockerfile.jvm"
   },
   "deploy": {
-    "startCommand": "java -jar target/quarkus-run.jar"
+    "startCommand": "./mvnw quarkus:dev"
   }
 }
