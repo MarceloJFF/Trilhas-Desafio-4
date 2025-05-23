@@ -14,4 +14,5 @@ COPY --from=build /project/target/quarkus-app /app
 
 EXPOSE 8080
 WORKDIR /app
+RUN rm -rf /root/.m2/repository/*
 CMD ["java", "-jar", "quarkus-run.jar"]
