@@ -105,10 +105,25 @@
 
     <build>
         <plugins>
+<plugin>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-maven-plugin</artifactId>
+      <version>${quarkus.platform.version}</version>
+      <executions>
+        <execution>
+          <goals>
+            <goal>build</goal>
+            <goal>generate-code</goal>
+            <goal>generate-code-tests</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+
             <plugin>
-                <groupId>${quarkus.platform.group-id}</groupId>
-                <artifactId>quarkus-maven-plugin</artifactId>
-                <version>${quarkus.platform.version}</version>
+                <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-compiler-plugin</artifactId>
+  <version>3.11.0</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
