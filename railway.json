@@ -3,7 +3,7 @@
   "build": {
     "builder": "NIXPACKS",
     "nixpacks": {
-      "buildCommand": "chmod +x ./mvnw && ./mvnw clean package -DskipTests"
+      "buildCommand": "./mvnw clean"
     }
   },
   "deploy": {
