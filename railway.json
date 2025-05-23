@@ -3,10 +3,10 @@
   "build": {
     "builder": "NIXPACKS",
     "nixpacks": {
-      "buildCommand": "./mvnw clean"
+      "buildCommand": "./mvnw quarkus:dev"
     }
   },
   "deploy": {
-    "startCommand": "./mvnw clean"
+    "startCommand": "./mvnw quarkus:dev"
   }
 }
