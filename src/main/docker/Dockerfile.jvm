@@ -1,10 +1,15 @@
 FROM quay.io/quarkus/ubi-quarkus-mandrel-builder-image:jdk-17 AS build
 COPY --chown=quarkus:quarkus . /project
 WORKDIR /project
+
+# Gera o pacote no formato correto
 RUN ./mvnw clean package -Dquarkus.package.type=uber-jar
 
 FROM registry.access.redhat.com/ubi9/openjdk-17:1.15
-COPY --from=build /project/target/*-runner.jar /work/application.jar
+
+# Copia o arquivo JAR com o nome exato que será gerado
+COPY --from=build /project/target/api-recycle-1.0.0-SNAPSHOT-runner.jar /app/application.jar
+
 EXPOSE 8080
-WORKDIR /work
+WORKDIR /app
 CMD ["java", "-jar", "application.jar"]

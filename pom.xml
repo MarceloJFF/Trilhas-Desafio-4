@@ -20,7 +20,10 @@
         <skipITs>true</skipITs>
         <surefire-plugin.version>3.5.2</surefire-plugin.version>
          <quarkus.native.builder-image>quay.io/quarkus/ubi-quarkus-mandrel-builder-image:jdk-21</quarkus.native.builder-image>
+        <quarkus.package.output-name>api-recycle</quarkus.package.output-name>
+
         <quarkus.package.type>uber-jar</quarkus.package.type>
+
     </properties>
 
     <dependencyManagement>
