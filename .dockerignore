@@ -1,2 +1,4 @@
 *
 !target/quarkus-app/*
+!target/lib/*
+!target/quarkus-app/*
