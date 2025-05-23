@@ -7,6 +7,6 @@
     }
   },
   "deploy": {
-    "startCommand": "./mvnw quarkus:dev"
+    "startCommand": "mvn clean package -Dquarkus.profile=prod\n java -jar target/api-recycle-1.0.0-SNAPSHOT-runner.jar\n"
   }
 }
