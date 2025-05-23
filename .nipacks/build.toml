@@ -1,0 +1,10 @@
+[phases.setup]
+nixPkgs = ["jdk21", "maven"]
+
+[phases.build]
+commands = [
+    "./mvnw clean package -DskipTests"
+]
+
+[start]
+command = "java -jar target/quarkus-run.jar"
