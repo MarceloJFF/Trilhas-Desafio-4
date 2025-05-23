@@ -3,16 +3,15 @@ FROM quay.io/quarkus/ubi-quarkus-mandrel-builder-image:jdk-17 AS build
 COPY --chown=quarkus:quarkus . /project
 WORKDIR /project
 
-# Gera o pacote no formato padrão do Quarkus (não uber-jar)
-RUN ./mvnw clean package
+# Gera o pacote quarkus-app sem testes para acelerar build
+RUN ./mvnw clean package -DskipTests
 
 # Estágio de execução
 FROM registry.access.redhat.com/ubi9/openjdk-17:1.15
 
-# Copia toda a estrutura quarkus-app
 COPY --from=build /project/target/quarkus-app /app
 
-EXPOSE 8080
 WORKDIR /app
-RUN rm -rf /root/.m2/repository/*
-CMD ["java", "-jar", "quarkus-run.jar"]
+EXPOSE 8080
+
+CMD ["java", "-cp", "quarkus-run.jar:lib/*", "io.quarkus.runner.GeneratedMain"]

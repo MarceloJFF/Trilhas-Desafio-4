@@ -3,10 +3,10 @@
   "build": {
     "builder": "NIXPACKS",
     "nixpacks": {
-      "buildCommand": "mvn io.quarkus:quarkus-maven-plugin:dev"
+      "buildCommand": "mvn clean package -Dquarkus.profile=prod -DskipTests"
     }
   },
   "deploy": {
-    "startCommand": "mvn clean package -Dquarkus.profile=prod\n java -jar target/api-recycle-1.0.0-SNAPSHOT-runner.jar\n"
+    "startCommand": "java -jar target/api-recycle-1.0.0-SNAPSHOT-runner.jar"
   }
 }
