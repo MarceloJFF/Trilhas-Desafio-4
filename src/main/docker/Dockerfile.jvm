@@ -1,10 +1,10 @@
-FROM quay.io/quarkus/ubi-quarkus-mandrel-builder-image:jdk-17 AS build  # Alterado para jdk-17
-COPY . /project
+FROM quay.io/quarkus/ubi-quarkus-mandrel-builder-image:jdk-17 AS build
+COPY --chown=quarkus:quarkus . /project
 WORKDIR /project
-RUN ./mvnw clean package
+RUN ./mvnw clean package -Dquarkus.package.type=uber-jar
 
-FROM quay.io/quarkus/quarkus-micro-image:2.0
-COPY --from=build /project/target/quarkus-app/quarkus-run.jar /work/app.jar
+FROM registry.access.redhat.com/ubi9/openjdk-17:1.15
+COPY --from=build /project/target/*-runner.jar /work/application.jar
 EXPOSE 8080
 WORKDIR /work
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "application.jar"]

@@ -1,10 +1,7 @@
-[phases.setup]
-nixPkgs = ["jdk21", "maven"]
-
 [phases.build]
 commands = [
-    "./mvnw clean package -DskipTests"
+    "./mvnw clean package -Dquarkus.package.type=uber-jar"
 ]
 
 [start]
-command = "java -jar target/quarkus-run.jar"
+command = "java -jar target/*-runner.jar"
