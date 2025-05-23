@@ -3,10 +3,10 @@
   "build": {
     "builder": "NIXPACKS",
     "nixpacks": {
-      "buildCommand": "./mvnw clean"
+      "buildCommand": "./mvnw clean package"
     }
   },
   "deploy": {
-    "startCommand": "./mvnw clean"
+    "startCommand": "java -jar target/quarkus-app/quarkus-run.jar"
   }
 }
