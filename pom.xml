@@ -173,7 +173,7 @@
                 <quarkus.native.enabled>true</quarkus.native.enabled>
             </properties>
             <properties>
-                    <quarkus.container-image.build>true</quarkus.container-image.build>
+                <quarkus.package.type>legacy-jar</quarkus.package.type>
             </properties>
         </profile>
     </profiles>
