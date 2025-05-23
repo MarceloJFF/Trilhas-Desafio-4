@@ -168,13 +168,7 @@
                     <name>native</name>
                 </property>
             </activation>
-            <properties>
-                <skipITs>false</skipITs>
-                <quarkus.native.enabled>true</quarkus.native.enabled>
-            </properties>
-            <properties>
-                <quarkus.package.type>legacy-jar</quarkus.package.type>
-            </properties>
+        
         </profile>
     </profiles>
 </project>
