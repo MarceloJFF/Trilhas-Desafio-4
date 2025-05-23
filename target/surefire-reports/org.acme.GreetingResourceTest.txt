@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: org.acme.GreetingResourceTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 11.01 s <<< FAILURE! -- in org.acme.GreetingResourceTest
-org.acme.GreetingResourceTest.testHelloEndpoint -- Time elapsed: 0.004 s <<< ERROR!
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 10.98 s <<< FAILURE! -- in org.acme.GreetingResourceTest
+org.acme.GreetingResourceTest.testHelloEndpoint -- Time elapsed: 0.002 s <<< ERROR!
 java.lang.RuntimeException: java.lang.RuntimeException: Failed to start quarkus
 	at io.quarkus.test.junit.QuarkusTestExtension.throwBootFailureException(QuarkusTestExtension.java:667)
 	at io.quarkus.test.junit.QuarkusTestExtension.interceptTestClassConstructor(QuarkusTestExtension.java:762)
