@@ -1,0 +1,6 @@
+{
+  "build": {
+    "builder": "DOCKERFILE",
+    "dockerfilePath": "src/main/docker/Dockerfile.jvm"
+  }
+}
