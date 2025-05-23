@@ -1,5 +1,5 @@
 FROM quay.io/quarkus/ubi-quarkus-mandrel-builder-image:jdk-21 AS build
-COPY . /project
+COPY --chown=quarkus:quarkus . /project
 WORKDIR /project
 RUN ./mvnw clean package
 
