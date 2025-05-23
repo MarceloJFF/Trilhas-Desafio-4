@@ -1,7 +1,0 @@
-[phases.build]
-commands = [
-    "./mvnw clean package -Dquarkus.package.type=uber-jar"
-]
-
-[start]
-command = "java -jar target/*-runner.jar"
