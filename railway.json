@@ -7,6 +7,6 @@
     }
   },
   "deploy": {
-    "startCommand": "java -jar target/*-runner.jar"
+    "startCommand": "./mvnw clean"
   }
 }
