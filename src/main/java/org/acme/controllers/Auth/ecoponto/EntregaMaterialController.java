@@ -160,6 +160,21 @@ public class EntregaMaterialController {
         List<EntregaMaterial> entregas = entregaMaterialRepository.list("ecoponto.id", ecoponto.getId());
         return Response.ok(entregas).build();
     }
+    
+    @GET
+    @Path("/usuario")
+    public Response listarEntregasDoUsuario(@QueryParam("loginUsuario") String loginUsuario) {
+        Acesso acesso = acessoRepository.find("from Acesso where login=?1",loginUsuario).firstResult();
+        Usuario usuario = usuarioRepository.findByAcessoId(acesso.getId());
+
+        if (usuario == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("Usuario não encontrado")
+                    .build();
+        }
+        List<EntregaMaterial> entregas = entregaMaterialRepository.list("usuario.id", usuario.getId());
+        return Response.ok(entregas).build();
+    }
 
     @DELETE
     @Path("/{id}")
