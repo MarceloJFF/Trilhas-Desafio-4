@@ -32,7 +32,7 @@ public class AuthResource {
             String token = Jwt.issuer("https://trilhas-desafio-4-production-890a.up.railway.app")
                     .upn(acesso.getLogin())
                     .groups(groups)
-                    .expiresIn(Duration.ofMinutes(5)) // ✅ Tempo de expiração reduzido
+                    .expiresIn(Duration.ofMinutes(10)) // ✅ Tempo de expiração reduzido
                     .sign();
             return Response.ok().entity(token).build();
         }
