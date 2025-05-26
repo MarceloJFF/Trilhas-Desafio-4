@@ -32,7 +32,7 @@ public class AuthResource {
             String token = Jwt.issuer("http://localhost:8080")
                     .upn(acesso.getLogin())
                     .groups(groups)
-                    .expiresIn(Duration.ofHours(1))
+                    .expiresIn(Duration.ofMinutes(5)) // ✅ Tempo de expiração reduzido
                     .sign();
             return Response.ok().entity(token).build();
         }
