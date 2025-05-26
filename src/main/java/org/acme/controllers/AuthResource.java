@@ -29,7 +29,7 @@ public class AuthResource {
         if (acessoModel != null && PasswordUtil.check(acesso.getPassword(), acessoModel.getPassword())) {
             Set<String> groups = new HashSet<>();
             groups.add(acessoModel.getTipo());
-            String token = Jwt.issuer("http://localhost:8080")
+            String token = Jwt.issuer("https://trilhas-desafio-4-production-890a.up.railway.app")
                     .upn(acesso.getLogin())
                     .groups(groups)
                     .expiresIn(Duration.ofMinutes(5)) // ✅ Tempo de expiração reduzido
